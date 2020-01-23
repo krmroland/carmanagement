@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\"",
+    "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php\"",
+    "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.12.0",
+    "prettier": "^1.19.1"
+  }
+}
