@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Users\Models;
 
+use App\Users\HasUniqueName;
 use Laravel\Airlock\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, HasUniqueName;
 
     /**
      * The attributes that are mass assignable.
