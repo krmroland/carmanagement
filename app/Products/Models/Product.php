@@ -5,23 +5,24 @@ namespace App\Products\Models;
 use App\Models\BaseModel;
 use Illuminate\Support\Arr;
 use App\Currencies\HasCurrency;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends BaseModel
 {
     use HasCurrency;
+
+    /**
+     * The available product types
+     */
+    public const TYPES = ['car', 'house'];
+
     /**
      * The casts array
      * @var array
      */
     protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2'];
 
-    /**
-     * The available product types
-     */
-    public const TYPES = ['car', 'house'];
     /**
      * A product has many variants
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -34,7 +35,6 @@ class Product extends BaseModel
     /**
      * Save the model to the database.
      *
-     * @param  array  $options
      * @return bool
      */
     public function save(array $options = [])

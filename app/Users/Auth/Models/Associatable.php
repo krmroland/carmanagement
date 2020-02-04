@@ -22,9 +22,9 @@ abstract class Associatable extends BaseModel
 
         return new AssociatableGate($this, $user);
     }
+
     /**
      * Determines if this organization has a direct member
-     * @param  User    $user
      * @return boolean
      */
     public function hasDirectMember(User $user)
@@ -36,17 +36,16 @@ abstract class Associatable extends BaseModel
 
     /**
      * Determines if a member is part of an orgganization
-     * @param  User    $user
      * @return boolean
      */
     public function hasMember(User $user)
     {
         return $this->isOwnedByUser($user) || $this->hasDirectMember($user);
     }
+
     /**
      * Adds a given member to an organization
-     * @param User $user
-     * @param abilities
+     * @param abilities $user
      * @return boolean
      */
     public function addMember(User $user, $abilities = [])
@@ -66,9 +65,9 @@ abstract class Associatable extends BaseModel
             ->wherePivot('user_id', $user->id)
             ->firstOrFail();
     }
+
     /**
      * Ensures a given member exists
-     * @param  User   $user
      * @return $this
      */
     public function ensureMemberExists(User $user)

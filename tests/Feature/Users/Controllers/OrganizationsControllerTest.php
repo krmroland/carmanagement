@@ -5,14 +5,13 @@ namespace Tests\Feature\Users\Controllers;
 use Tests\TestCase;
 use App\Users\Models\User;
 use App\Users\Models\Organization;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrganizationsControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_lists_the_available_organizations()
+    public function testItListsTheAvailableOrganizations()
     {
         factory(Organization::class, 3)->create();
 
@@ -22,7 +21,7 @@ class OrganizationsControllerTest extends TestCase
             ->assertJsonCount(3, 'data');
     }
 
-    public function test_it_creates_a_new_organization()
+    public function testItCreatesANewOrganization()
     {
         $data = factory(Organization::class)->make();
 
@@ -33,7 +32,7 @@ class OrganizationsControllerTest extends TestCase
             ->assertCreated();
     }
 
-    public function test_creating_organization_uses_id_of_authenticated_user()
+    public function testCreatingOrganizationUsesIdOfAuthenticatedUser()
     {
         $data = factory(Organization::class)->make();
 
@@ -45,7 +44,7 @@ class OrganizationsControllerTest extends TestCase
             ->assertJsonPath('organization.user_id', $user->id);
     }
 
-    public function test_user_cannot_create_organization_with_same_name()
+    public function testUserCannotCreateOrganizationWithSameName()
     {
         $data = factory(Organization::class)->make();
 
@@ -57,7 +56,7 @@ class OrganizationsControllerTest extends TestCase
             ->assertJsonPath('organization.user_id', $user->id);
     }
 
-    public function test_it_shows_the_details_of_an_organization()
+    public function testItShowsTheDetailsOfAnOrganization()
     {
         $user = factory(User::class)->create();
 
@@ -66,7 +65,7 @@ class OrganizationsControllerTest extends TestCase
         $organization->addMember($user);
 
         $this->actingAsUser($user)
-            ->getJson("/api/v1/organizations/$organization->id")
+            ->getJson("/api/v1/organizations/{$organization->id}")
             ->assertOk();
     }
 }

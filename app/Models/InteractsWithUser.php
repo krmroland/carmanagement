@@ -27,22 +27,22 @@ trait InteractsWithUser
 
     /**
      * The user that created the entity
-     * @param mixed|null $over_ride
      * @return BelongTo
      */
     public function user()
     {
         return $this->belongsTo(User::class, $this->getUserIdFieldName());
     }
+
     /**
      * Determines if the given model is owned by user
-     * @param  User    $user
      * @return boolean
      */
     public function isOwnedByUser(User $user)
     {
         return (int) $this->user_id === (int) $user->id;
     }
+
     /**
      * The owner of the model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -51,6 +51,7 @@ trait InteractsWithUser
     {
         return $this->user();
     }
+
     /**
      * Gets the created by field name
      * @return string

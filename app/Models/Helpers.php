@@ -6,9 +6,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Traits\Tappable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Support\Arrayable;
-use App\Actions\Registers\FindRelatedRegisters;
 
 trait Helpers
 {
@@ -139,6 +137,18 @@ trait Helpers
     }
 
     /**
+     * Gets the morph attributes
+     * @return array
+     */
+    public function getMorhpAttributes($morph)
+    {
+        return [
+            "{$morph}_id" => $this->getKey(),
+            "{$morph}_type" => $this->getMorphClass(),
+        ];
+    }
+
+    /**
      * Makes a model cache key
      * @param mixed|null $postfix
      * @return string
@@ -166,16 +176,5 @@ trait Helpers
     protected function asDateTime($value)
     {
         return Carbon::parse($value);
-    }
-    /**
-     * Gets the morph attributes
-     * @return array
-     */
-    public function getMorhpAttributes($morph)
-    {
-        return [
-            "{$morph}_id" => $this->getKey(),
-            "{$morph}_type" => $this->getMorphClass(),
-        ];
     }
 }

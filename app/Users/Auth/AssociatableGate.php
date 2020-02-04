@@ -13,16 +13,19 @@ class AssociatableGate
      * @var User
      */
     protected $user;
+
     /**
      * The associatable model
      * @var Associatable
      */
     protected $associatable;
+
     /**
      * The entity being checked against
      * @var Model|null
      */
     protected $model = null;
+
     /**
      * The user related key
      * @var string
@@ -56,7 +59,6 @@ class AssociatableGate
     /**
      * Authorizes a given ability name
      * @param  string $ability
-     * @return void
      */
     public function authorize($ability = null)
     {
@@ -83,6 +85,7 @@ class AssociatableGate
 
     /**
      * Determines if this class denies a give ability
+     * @param mixed|null $ability
      * @return boolean
      */
     public function denies($ability = null)
@@ -101,7 +104,6 @@ class AssociatableGate
 
     /**
      * Sets the gate for user
-     * @param  User   $user
      * @return $this
      */
     public function forUser(User $user)
@@ -113,7 +115,6 @@ class AssociatableGate
 
     /**
      * The model  we are checking against
-     * @param  Model  $model
      * @return $this
      */
     public function model(Model $model)
@@ -142,6 +143,22 @@ class AssociatableGate
         $this->userRelatedFieldName = $name;
 
         return $this;
+    }
+
+    /**
+     * Authorizes a user to perform a certain action
+     */
+    public function updateAbilities($abilities)
+    {
+        if (is_null($this->user) || !$this->associatable->hasDirectMember($this->user)) {
+            return false;
+        }
+
+        if (!is_array($abilities)) {
+            $abilities = func_get_args();
+        }
+
+        $this->associatable->members()->updateExistingPivot($this->user, compact('abilities'));
     }
 
     /**
@@ -191,22 +208,5 @@ class AssociatableGate
 
             return in_array('*', $abilities) || array_key_exists($ability, array_flip($abilities));
         });
-    }
-    /**
-     * Authorizes a user to perform a certain action
-     * @param  string $permission
-     * @return void
-     */
-    public function updateAbilities($abilities)
-    {
-        if (is_null($this->user) || !$this->associatable->hasDirectMember($this->user)) {
-            return false;
-        }
-
-        if (!is_array($abilities)) {
-            $abilities = func_get_args();
-        }
-
-        $this->associatable->members()->updateExistingPivot($this->user, compact('abilities'));
     }
 }

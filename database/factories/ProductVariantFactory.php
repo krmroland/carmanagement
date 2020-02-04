@@ -13,5 +13,3 @@ $factory->define(ProductVariant::class, function (Faker $faker) {
         'identifier' => $faker->unique()->domainWord,
     ];
 });
-
-

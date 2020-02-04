@@ -9,13 +9,12 @@ class UniqueRule extends Unique
     /**
      * Ignores in route
      * @param  string $name
-     * @return void
      */
     public function ignoreRoute($name, $column = 'id')
     {
         // could be an id or a model
         if ($id = request()->route($name)) {
-            $this->ignore($name, $column);
+            $this->ignore($id, $column);
         }
 
         return $this;

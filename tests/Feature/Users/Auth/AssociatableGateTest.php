@@ -5,21 +5,20 @@ namespace Tests\Feature\Users\Auth;
 use Tests\TestCase;
 use App\Users\Models\User;
 use App\Users\Models\Organization;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AssociatableGateTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_gate_allow_returns_null_for_no_users()
+    public function testGateAllowReturnsNullForNoUsers()
     {
         $organization = factory(Organization::class)->create();
 
         $this->assertFalse($organization->gate(null)->allows());
     }
 
-    public function test_gate_allows_oragnization_owners()
+    public function testGateAllowsOragnizationOwners()
     {
         $user = factory(User::class)->create();
 
@@ -28,7 +27,7 @@ class AssociatableGateTest extends TestCase
         $this->assertTrue($organization->gate($user)->allows('every-action'));
     }
 
-    public function test_gate_allows_oragnization_members()
+    public function testGateAllowsOragnizationMembers()
     {
         $user = factory(User::class)->create();
 
@@ -39,7 +38,7 @@ class AssociatableGateTest extends TestCase
         $this->assertTrue($organization->gate($user)->allows());
     }
 
-    public function test_gate_denies_memebers_with_no_specfic_permission()
+    public function testGateDeniesMemebersWithNoSpecficPermission()
     {
         $user = factory(User::class)->create();
 
@@ -50,7 +49,7 @@ class AssociatableGateTest extends TestCase
         $this->assertFalse($organization->gate($user)->allows('specific-permission'));
     }
 
-    public function test_gate_allows_memebers_with_specfic_permission()
+    public function testGateAllowsMemebersWithSpecficPermission()
     {
         $user = factory(User::class)->create();
 
@@ -63,7 +62,7 @@ class AssociatableGateTest extends TestCase
         $this->assertTrue($organization->gate($user)->allows('specific-permission'));
     }
 
-    public function test_add_members_adds_member_with_abilities()
+    public function testAddMembersAddsMemberWithAbilities()
     {
         $user = factory(User::class)->create();
 

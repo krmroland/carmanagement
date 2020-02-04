@@ -4,7 +4,6 @@ namespace App\Products\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Validation\Rule;
-use Illuminate\Database\Eloquent\Model;
 
 class ProductVariant extends BaseModel
 {
@@ -13,9 +12,9 @@ class ProductVariant extends BaseModel
      * @var array
      */
     protected $casts = ['details' => 'json'];
+
     /**
      * Hooks into the eloquent booting process
-     * @return void
      */
     public static function boot()
     {
@@ -25,9 +24,9 @@ class ProductVariant extends BaseModel
             return $model->validateUniqueIdentifier();
         });
     }
+
     /**
      * Validates the unique indetifier before saving
-     * @return void
      * @throws Validation Exception
      */
     public function validateUniqueIdentifier()

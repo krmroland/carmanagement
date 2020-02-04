@@ -22,6 +22,7 @@ class OrganizationsRequest extends FormRequest
             'unique_name' => 'required',
         ];
     }
+
     /**
      * The name validation rule
      * @return \Illuminate\Validation\Rules\Unique

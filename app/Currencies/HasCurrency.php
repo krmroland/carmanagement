@@ -22,6 +22,7 @@ trait HasCurrency
 
         $this->attributes['currency'] = $currency;
     }
+
     /**
      * Gets the currency attribute
      * @param  string $code
@@ -29,6 +30,6 @@ trait HasCurrency
      */
     public function getCurrencyAttribute($code)
     {
-        return config()->get("currencies.$code", $code);
+        return config()->get("currencies.${code}", $code);
     }
 }

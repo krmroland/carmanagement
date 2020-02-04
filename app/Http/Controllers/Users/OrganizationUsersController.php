@@ -12,7 +12,6 @@ class OrganizationUsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  \App\Users\Models\Organization  $organization
      * @return \Illuminate\Http\Response
      */
     public function index(Organization $organization)
@@ -25,8 +24,6 @@ class OrganizationUsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Users\Models\Organization  $organization
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Organization $organization)
@@ -43,8 +40,6 @@ class OrganizationUsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Users\Models\Organization  $organization
-     * @param  \App\Users\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(Organization $organization, User $user)
@@ -54,9 +49,6 @@ class OrganizationUsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Users\Models\Organization  $organization
-     * @param  \App\Users\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Organization $organization, User $user)
@@ -76,8 +68,6 @@ class OrganizationUsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Users\Models\Organization  $organization
-     * @param  \App\Users\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(Organization $organization, User $user)

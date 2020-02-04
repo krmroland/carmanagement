@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Products;
 
-use App\Users\Models\User;
 use Illuminate\Http\Request;
 use App\Contracts\ProductOwner;
 use App\Http\Controllers\Controller;
-use App\Users\Models\OwnerUniqueName;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Products\ProductReadRequest;
 use App\Http\Requests\Products\ProductWriteRequest;
@@ -74,6 +72,5 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

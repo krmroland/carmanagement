@@ -3,18 +3,15 @@
 namespace App\Users;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use App\Products\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Users\Models\OwnerUniqueName;
-use Illuminate\Validation\ValidationException;
 
 trait OwnsProducts
 {
     /**
      * Save the model to the database.
      *
-     * @param  array  $options
      * @return bool
      */
     public function save(array $options = [])
@@ -43,6 +40,7 @@ trait OwnsProducts
     {
         return $this->morphOne(OwnerUniqueName::class, 'owner');
     }
+
     /**
      * Sets a given unique name
      */
@@ -54,6 +52,7 @@ trait OwnsProducts
 
         return $this;
     }
+
     /**
      * Gets the unique name of the given model
      * @return string|null
@@ -62,6 +61,7 @@ trait OwnsProducts
     {
         return optional($this->uniqueName)->value;
     }
+
     /**
      * The products relationship
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

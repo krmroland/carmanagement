@@ -6,7 +6,6 @@ use Tests\TestCase;
 use App\Users\Models\User;
 use App\Users\Models\Organization;
 use App\Users\Models\OwnerUniqueName;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -15,7 +14,7 @@ class OwnerUniqueNameTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_sets_a_gicen_users_unique_name()
+    public function testItSetsAGicenUsersUniqueName()
     {
         $user = factory(User::class)->create();
 
@@ -24,7 +23,7 @@ class OwnerUniqueNameTest extends TestCase
         $this->assertEquals($user->uniqueName->value, 'me');
     }
 
-    public function test_updated_doesnt_throw_an_exception_for_the_same_owner_with_same_unique_name()
+    public function testUpdatedDoesntThrowAnExceptionForTheSameOwnerWithSameUniqueName()
     {
         $user = factory(User::class)->create();
 
@@ -35,7 +34,7 @@ class OwnerUniqueNameTest extends TestCase
         $this->assertEquals($user->uniqueName->value, 'me');
     }
 
-    public function test_user_cannot_user_a_name_that_has_been_used_by_an_organization()
+    public function testUserCannotUserANameThatHasBeenUsedByAnOrganization()
     {
         $user = factory(User::class)->create();
 
@@ -45,7 +44,7 @@ class OwnerUniqueNameTest extends TestCase
         $organization->setUniqueName('me');
     }
 
-    public function test_it_resolves_a_user_from_a_route_user_name()
+    public function testItResolvesAUserFromARouteUserName()
     {
         $user = factory(User::class)
             ->create()
@@ -54,7 +53,7 @@ class OwnerUniqueNameTest extends TestCase
         $this->assertTrue($user->is((new OwnerUniqueName())->resolveRouteBinding('me')));
     }
 
-    public function test_it_resolve_route_binding_fails_if_username_doesnot_exist()
+    public function testItResolveRouteBindingFailsIfUsernameDoesnotExist()
     {
         $this->expectException(ModelNotFoundException::class);
 

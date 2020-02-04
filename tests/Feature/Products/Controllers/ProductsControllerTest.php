@@ -6,14 +6,13 @@ use Tests\TestCase;
 use App\Users\Models\User;
 use App\Products\Models\Product;
 use App\Users\Models\Organization;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test__users_can_create_a_personal_product()
+    public function testUsersCanCreateAPersonalProduct()
     {
         $user = factory(User::class)->create();
 
@@ -28,7 +27,7 @@ class ProductsControllerTest extends TestCase
         $this->assertDatabaseHas('products', ['name' => $data['name']]);
     }
 
-    public function test_a_organization_users_can_create_a_product_in_an_organization()
+    public function testAOrganizationUsersCanCreateAProductInAnOrganization()
     {
         $user = factory(User::class)->create();
 
@@ -44,7 +43,7 @@ class ProductsControllerTest extends TestCase
             ->assertCreated();
     }
 
-    public function test_non_organization_users_cannot_create_organization_products()
+    public function testNonOrganizationUsersCannotCreateOrganizationProducts()
     {
         $user = factory(User::class)->create();
 
@@ -56,7 +55,8 @@ class ProductsControllerTest extends TestCase
             ->postJson("api/v1/@{$organization->getUniqueName()}/products", $data)
             ->assertForbidden();
     }
-    public function test_organization_users_with_write_permissions_can_create_products()
+
+    public function testOrganizationUsersWithWritePermissionsCanCreateProducts()
     {
         $user = factory(User::class)->create();
 
@@ -72,7 +72,8 @@ class ProductsControllerTest extends TestCase
             ->postJson("api/v1/@{$organization->getUniqueName()}/products", $data)
             ->assertCreated();
     }
-    public function test_create_fails_for_organization_memebers_with_no_write_permission()
+
+    public function testCreateFailsForOrganizationMemebersWithNoWritePermission()
     {
         $user = factory(User::class)->create();
 
@@ -87,7 +88,7 @@ class ProductsControllerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_it_loads_all_user_products()
+    public function testItLoadsAllUserProducts()
     {
         // two for some other users
         factory(Product::class, 2)->create();
@@ -102,7 +103,7 @@ class ProductsControllerTest extends TestCase
             ->assertJsonCount(3, 'data');
     }
 
-    public function test_get_all_products_fails_for_non_organization_memebers()
+    public function testGetAllProductsFailsForNonOrganizationMemebers()
     {
         // two for some other users
         factory(Product::class, 2)->create();
@@ -118,7 +119,7 @@ class ProductsControllerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_it_lists_the_details_of_a_product()
+    public function testItListsTheDetailsOfAProduct()
     {
         // two for some other users
         $user = factory(User::class)->create();
@@ -130,7 +131,8 @@ class ProductsControllerTest extends TestCase
             ->assertOk()
             ->assertJson(['id' => $product->id]);
     }
-    public function test_it_updates_an_existing_product()
+
+    public function testItUpdatesAnExistingProduct()
     {
         // two for some other users
         $user = factory(User::class)->create();
