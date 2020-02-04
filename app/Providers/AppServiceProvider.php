@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -33,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
             'user' => \App\Users\Models\User::class,
             'organization' => \App\Users\Models\Organization::class,
         ]);
+
+        Route::model('projectOwner', \App\Users\Models\OwnerUniqueName::class);
     }
 }

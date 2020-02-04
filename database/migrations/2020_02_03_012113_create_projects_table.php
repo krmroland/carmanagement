@@ -18,10 +18,13 @@ class CreateProjectsTable extends Migration
             $table->string('name')->index();
             $table->morphs('owner'); //could be organization or user
             $table->string('currency');
-            $table->json('details');
+            $table->json('details')->nullable();
             $table->string('image_path')->nullable();
-            $table->string('identifier')->nullable(); // eg number plate for houses
+            $table->string('identifier')->nullable(); // eg number plate for cars
             $table->unsignedBigInteger('current_user_id')->nullable();
+
+            $table->unique(['identifier', 'owner_type', 'owner_id']);
+
             $table
                 ->decimal('total_cost')
                 ->unsigned()

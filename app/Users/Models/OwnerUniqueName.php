@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-class OwnerFromUniqueName extends BaseModel
+class OwnerUniqueName extends BaseModel
 {
     /**
      * The owner of the user name
@@ -24,7 +24,7 @@ class OwnerFromUniqueName extends BaseModel
      */
     public function resolveRouteBinding($value)
     {
-        return OwnerFromUniqueName::where(compact('value'))
+        return static::where(compact('value'))
             ->firstOrFail()
             ->owner()
             ->firstOrFail();
@@ -40,20 +40,6 @@ class OwnerFromUniqueName extends BaseModel
     }
 
     /**
-     * Determines if the value has been ysed
-     * @param  string $value
-     * @param  id|null $ignoreId
-     * @return boolean
-     */
-    public function valueHasBeenUsed($value, $ignoreId = null)
-    {
-        return static::where(['value' => Str::slug($value)])
-            ->when($ignoreId, function ($query) use ($ignoreId) {
-                $query->whereKeyNot($ignoreId);
-            })
-            ->exists();
-    }
-    /**
      * Updates the current value
      * @param  string $value
      * @return $this
@@ -67,5 +53,20 @@ class OwnerFromUniqueName extends BaseModel
         }
 
         return $this->persistAttributes(compact('value'));
+    }
+
+    /**
+     * Determines if the value has been ysed
+     * @param  string $value
+     * @param  id|null $ignoreId
+     * @return boolean
+     */
+    public function valueHasBeenUsed($value, $ignoreId = null)
+    {
+        return static::where(['value' => Str::slug($value)])
+            ->when($ignoreId, function ($query) use ($ignoreId) {
+                $query->whereKeyNot($ignoreId);
+            })
+            ->exists();
     }
 }

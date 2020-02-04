@@ -4,11 +4,12 @@ namespace App\Users;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Projects\Models\Project;
 use Illuminate\Support\Facades\DB;
-use App\Users\Models\OwnerFromUniqueName;
+use App\Users\Models\OwnerUniqueName;
 use Illuminate\Validation\ValidationException;
 
-trait HasUniqueName
+trait OwnsProjects
 {
     /**
      * Save the model to the database.
@@ -36,7 +37,7 @@ trait HasUniqueName
      */
     public function uniqueName()
     {
-        return $this->morphOne(OwnerFromUniqueName::class, 'owner');
+        return $this->morphOne(OwnerUniqueName::class, 'owner');
     }
     /**
      * Sets a given unique name
@@ -48,5 +49,21 @@ trait HasUniqueName
             ->updateValue($value);
 
         return $this;
+    }
+    /**
+     * Gets the unique name of the given model
+     * @return string|null
+     */
+    public function getUniqueName()
+    {
+        return optional($this->uniqueName)->value;
+    }
+    /**
+     * The projects relationship
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function projects()
+    {
+        return $this->morphMany(Project::class, 'owner');
     }
 }

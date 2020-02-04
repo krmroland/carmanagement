@@ -83,6 +83,6 @@ class OrganizationUsersControllerTest extends TestCase
 
             ->assertOk();
 
-        $this->assertEquals($organization->lookupMember($member)->pivot->abilities, $abilities);
+        $this->assertEquals($organization->findUser($member)->pivot->abilities, $abilities);
     }
 }

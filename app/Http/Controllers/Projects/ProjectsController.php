@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Projects;
 
-use App\Http\Controllers\Controller;
+use App\Users\Models\User;
 use Illuminate\Http\Request;
+use App\Contracts\ProjectOwner;
+use App\Http\Controllers\Controller;
+use App\Users\Models\OwnerUniqueName;
+use Illuminate\Support\Facades\Response;
+use App\Http\Requests\Projects\ProjectRequest;
 
 class ProjectsController extends Controller
 {
@@ -12,9 +17,9 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProjectOwner $projectOwner)
     {
-        //
+        return $projectOwner->projects()->paginateByRequest();
     }
 
     /**
@@ -23,9 +28,14 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request, ProjectOwner $projectOwner)
     {
-        //
+        $project = $projectOwner->projects()->create($request->validated());
+
+        return Response::json(
+            ['message' => 'Project was created successfully', 'project' => $project],
+            201
+        );
     }
 
     /**

@@ -5,13 +5,13 @@ namespace Tests\Feature\Users\Models;
 use Tests\TestCase;
 use App\Users\Models\User;
 use App\Users\Models\Organization;
-use App\Users\Models\OwnerFromUniqueName;
+use App\Users\Models\OwnerUniqueName;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class OwnerFromUniqueNameTest extends TestCase
+class OwnerUniqueNameTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -51,13 +51,13 @@ class OwnerFromUniqueNameTest extends TestCase
             ->create()
             ->setUniqueName('me');
 
-        $this->assertTrue($user->is((new OwnerFromUniqueName())->resolveRouteBinding('me')));
+        $this->assertTrue($user->is((new OwnerUniqueName())->resolveRouteBinding('me')));
     }
 
     public function test_it_resolve_route_binding_fails_if_username_doesnot_exist()
     {
         $this->expectException(ModelNotFoundException::class);
 
-        (new OwnerFromUniqueName())->resolveRouteBinding('me');
+        (new OwnerUniqueName())->resolveRouteBinding('me');
     }
 }

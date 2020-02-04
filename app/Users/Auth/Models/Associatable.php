@@ -46,12 +46,13 @@ abstract class Associatable extends BaseModel
     /**
      * Adds a given member to an organization
      * @param User $user
+     * @param abilities
      * @return boolean
      */
-    public function addMember(User $user)
+    public function addMember(User $user, $abilities = [])
     {
         if (!$this->isOwnedByUser($user)) {
-            return (bool) $this->members()->attach($user);
+            return (bool) $this->members()->attach($user, compact('abilities'));
         }
     }
 
@@ -59,7 +60,7 @@ abstract class Associatable extends BaseModel
      * Finds a given member in the current association
      * @return \App\Users\Models\User|null
      */
-    public function lookupMember(User $user)
+    public function findUser(User $user)
     {
         return $this->members()
             ->wherePivot('user_id', $user->id)
@@ -72,7 +73,7 @@ abstract class Associatable extends BaseModel
      */
     public function ensureMemberExists(User $user)
     {
-        $this->lookupMember($user);
+        $this->findUser($user);
 
         return $this;
     }

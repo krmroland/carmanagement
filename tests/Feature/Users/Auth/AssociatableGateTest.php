@@ -62,4 +62,15 @@ class AssociatableGateTest extends TestCase
 
         $this->assertTrue($organization->gate($user)->allows('specific-permission'));
     }
+
+    public function test_add_members_adds_member_with_abilities()
+    {
+        $user = factory(User::class)->create();
+
+        $organization = factory(Organization::class)->create();
+
+        $organization->addMember($user, ['permission-one']);
+
+        $this->assertEquals($organization->findUser($user)->pivot->abilities, ['permission-one']);
+    }
 }

@@ -167,4 +167,15 @@ trait Helpers
     {
         return Carbon::parse($value);
     }
+    /**
+     * Gets the morph attributes
+     * @return array
+     */
+    public function getMorhpAttributes($morph)
+    {
+        return [
+            "{$morph}_id" => $this->getKey(),
+            "{$morph}_type" => $this->getMorphClass(),
+        ];
+    }
 }
