@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectRatesTable extends Migration
+class CreateProductRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProjectRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_rates', function (Blueprint $table) {
+        Schema::create('product_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id')->index();
+            $table->unsignedBigInteger('product_id')->index();
             $table->string('type')->index();
             $table->string('currency');
             $table->decimal('current_amount');
@@ -23,9 +23,9 @@ class CreateProjectRatesTable extends Migration
             $table->timestamp('next_amount_starts_at')->nullable(); // use this to reference future amounts
             $table->string('interval')->index(); // daily weekly monthly and annually
             $table
-                ->foreign('project_id')
+                ->foreign('product_id')
                 ->references('id')
-                ->on('projects')
+                ->on('products')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -38,6 +38,6 @@ class CreateProjectRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_rates');
+        Schema::dropIfExists('product_rates');
     }
 }

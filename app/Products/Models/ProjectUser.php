@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Projects\Models;
+namespace App\Products\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectRateHistory extends BaseModel
+class ProductUser extends BaseModel
 {
     //
 }

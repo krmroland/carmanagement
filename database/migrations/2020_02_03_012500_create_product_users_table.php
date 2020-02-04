@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectUsersTable extends Migration
+class CreateProductUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProjectUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_users', function (Blueprint $table) {
+        Schema::create('product_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id')->index();
+            $table->unsignedBigInteger('product_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->timestamp('joined_at')->nullable();
             $table->timestamp('left_at')->nullable();
@@ -24,9 +24,9 @@ class CreateProjectUsersTable extends Migration
             $table->decimal('paid_amount')->nullable();
 
             $table
-                ->foreign('project_id')
+                ->foreign('product_id')
                 ->references('id')
-                ->on('projects')
+                ->on('products')
                 ->onDelete('cascade');
             $table
                 ->foreign('user_id')
@@ -45,6 +45,6 @@ class CreateProjectUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_users');
+        Schema::dropIfExists('product_users');
     }
 }

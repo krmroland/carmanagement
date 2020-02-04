@@ -3,15 +3,15 @@
 namespace App\Users\Models;
 
 use App\Models\Helpers;
-use App\Users\OwnsProjects;
-use App\Contracts\ProjectOwner;
+use App\Users\OwnsProducts;
+use App\Contracts\ProductOwner;
 use Laravel\Airlock\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements ProjectOwner
+class User extends Authenticatable implements ProductOwner
 {
-    use Notifiable, HasApiTokens, Helpers, OwnsProjects;
+    use Notifiable, HasApiTokens, Helpers, OwnsProducts;
 
     /**
      * The attributes that are mass assignable.

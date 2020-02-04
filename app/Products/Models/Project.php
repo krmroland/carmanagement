@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Projects\Models;
+namespace App\Products\Models;
 
 use App\Models\BaseModel;
 use App\Currencies\HasCurrency;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends BaseModel
+class Product extends BaseModel
 {
     use HasCurrency;
     /**
@@ -17,7 +17,7 @@ class Project extends BaseModel
     protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2'];
 
     /**
-     * The available project types
+     * The available product types
      */
     public const TYPES = ['car', 'house'];
     /**
@@ -39,8 +39,12 @@ class Project extends BaseModel
      */
     public function validateUniqueIdentifier()
     {
+        if (blank($this->identifier)) {
+            return;
+        }
+
         return validator()->validate($this->only('identifier'), [
-            'identifier' => Rule::unique('projects')
+            'identifier' => Rule::unique('products')
                 ->ignore($this->id)
                 ->where(function ($query) {
                     $query->where($this->only(['owner_id', 'owner_type']));

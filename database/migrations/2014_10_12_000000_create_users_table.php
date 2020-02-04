@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
                 ->nullable()
                 ->unique();
             $table->boolean('is_admin')->default(0);
-            $table->unsignedBigInteger('total_projects')->nullable();
+            $table->unsignedBigInteger('total_products')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

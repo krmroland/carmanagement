@@ -35,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
             'organization' => \App\Users\Models\Organization::class,
         ]);
 
-        Route::model('projectOwner', \App\Users\Models\OwnerUniqueName::class);
+        Route::model('productOwner', \App\Users\Models\OwnerUniqueName::class);
     }
 }

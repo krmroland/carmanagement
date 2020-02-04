@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectRateHistoriesTable extends Migration
+class CreateProductRateHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateProjectRateHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_rate_histories', function (Blueprint $table) {
+        Schema::create('product_rate_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_rate_id')->index();
+            $table->unsignedBigInteger('product_rate_id')->index();
             $table->string('currency');
             $table->decimal('before');
             $table->decimal('current');
             $table->timestamp('starts_on');
             $table->timestamps();
             $table
-                ->foreign('project_rate_id')
+                ->foreign('product_rate_id')
                 ->references('id')
-                ->on('project_rates')
+                ->on('product_rates')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +36,6 @@ class CreateProjectRateHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_rate_histories');
+        Schema::dropIfExists('product_rate_histories');
     }
 }

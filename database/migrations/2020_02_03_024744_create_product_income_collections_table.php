@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectIncomeCollectionsTable extends Migration
+class CreateProductIncomeCollectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProjectIncomeCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_income_collections', function (Blueprint $table) {
+        Schema::create('product_income_collections', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id')->index();
+            $table->unsignedBigInteger('product_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->decimal('amount');
             $table->string('currency');
@@ -26,9 +26,9 @@ class CreateProjectIncomeCollectionsTable extends Migration
             $table->string('image_path')->nullable();
             $table->timestamps();
             $table
-                ->foreign('project_id')
+                ->foreign('product_id')
                 ->references('id')
-                ->on('projects')
+                ->on('products')
                 ->onDelete('cascade');
 
             $table
@@ -52,6 +52,6 @@ class CreateProjectIncomeCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_income_collections');
+        Schema::dropIfExists('product_income_collections');
     }
 }

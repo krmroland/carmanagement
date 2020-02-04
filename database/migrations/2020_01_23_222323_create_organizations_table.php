@@ -18,7 +18,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id')->index();
             $table->text('address')->nullable();
-            $table->unsignedBigInteger('total_projects')->nullable();
+            $table->unsignedBigInteger('total_products')->nullable();
             $table->unsignedBigInteger('total_users')->nullable();
             $table->timestamps();
             $table->softDeletes();

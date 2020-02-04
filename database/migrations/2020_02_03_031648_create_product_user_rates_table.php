@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectUserRatesTable extends Migration
+class CreateProductUserRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateProjectUserRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_user_rates', function (Blueprint $table) {
+        Schema::create('product_user_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_id')->index();
+            $table->unsignedBigInteger('product_id')->index();
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('rate_id')->index();
             $table->unsignedBigInteger('current_rate_discount')->nullable();
-            $table->unique(['project_id', 'user_id', 'rate_id'])->index();
+            $table->unique(['product_id', 'user_id', 'rate_id'])->index();
             $table->timestamps();
             $table
-                ->foreign('project_id')
+                ->foreign('product_id')
                 ->references('id')
-                ->on('projects')
+                ->on('products')
                 ->onDelete('cascade');
 
             $table
@@ -36,7 +36,7 @@ class CreateProjectUserRatesTable extends Migration
             $table
                 ->foreign('rate_id')
                 ->references('id')
-                ->on('project_rates')
+                ->on('product_rates')
                 ->onDelete('cascade');
         });
     }
@@ -48,6 +48,6 @@ class CreateProjectUserRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_user_rates');
+        Schema::dropIfExists('product_user_rates');
     }
 }

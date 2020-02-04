@@ -4,12 +4,12 @@ namespace App\Users;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use App\Projects\Models\Project;
+use App\Products\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Users\Models\OwnerUniqueName;
 use Illuminate\Validation\ValidationException;
 
-trait OwnsProjects
+trait OwnsProducts
 {
     /**
      * Save the model to the database.
@@ -59,11 +59,11 @@ trait OwnsProjects
         return optional($this->uniqueName)->value;
     }
     /**
-     * The projects relationship
+     * The products relationship
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function projects()
+    public function products()
     {
-        return $this->morphMany(Project::class, 'owner');
+        return $this->morphMany(Product::class, 'owner');
     }
 }

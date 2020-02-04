@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Projects;
+namespace App\Http\Controllers\Products;
 
 use App\Users\Models\User;
 use Illuminate\Http\Request;
-use App\Contracts\ProjectOwner;
+use App\Contracts\ProductOwner;
 use App\Http\Controllers\Controller;
 use App\Users\Models\OwnerUniqueName;
 use Illuminate\Support\Facades\Response;
-use App\Http\Requests\Projects\ProjectRequest;
+use App\Http\Requests\Products\ProductReadRequest;
+use App\Http\Requests\Products\ProductWriteRequest;
 
-class ProjectsController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProjectOwner $projectOwner)
+    public function index(ProductReadRequest $request, ProductOwner $productOwner)
     {
-        return $projectOwner->projects()->paginateByRequest();
+        return $productOwner->products()->paginateByRequest();
     }
 
     /**
@@ -28,12 +29,12 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProjectRequest $request, ProjectOwner $projectOwner)
+    public function store(ProductWriteRequest $request, ProductOwner $productOwner)
     {
-        $project = $projectOwner->projects()->create($request->validated());
+        $product = $productOwner->products()->create($request->validated());
 
         return Response::json(
-            ['message' => 'Project was created successfully', 'project' => $project],
+            ['message' => 'Product was created successfully', 'product' => $product],
             201
         );
     }
@@ -44,9 +45,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductReadRequest $request, ProductOwner $productOwner, $id)
     {
-        //
+        return $productOwner->products()->findOrFail($id);
     }
 
     /**
@@ -56,9 +57,12 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductWriteRequest $request, ProductOwner $productOwner, $id)
     {
-        //
+        return $productOwner
+            ->products()
+            ->findOrFail($id)
+            ->persistAttributes($request->validated());
     }
 
     /**

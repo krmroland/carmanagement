@@ -4,10 +4,10 @@
 
 use App\Users\Models\User;
 use Faker\Generator as Faker;
-use App\Projects\Models\Project;
+use App\Products\Models\Product;
 use App\Users\Models\Organization;
 
-$factory->define(Project::class, function (Faker $faker) {
+$factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'type' => $faker->randomElement(['house', 'car']),
@@ -17,12 +17,12 @@ $factory->define(Project::class, function (Faker $faker) {
     ];
 });
 
-$factory->afterMaking(Project::class, function ($project, Faker $faker) {
-    if (!array_key_exists('owner_id', $project->getAttributes())) {
+$factory->afterMaking(Product::class, function ($product, Faker $faker) {
+    if (!array_key_exists('owner_id', $product->getAttributes())) {
         $class = $faker->randomElement([Organization::class, User::class]);
 
         $owner = factory($class)->create();
 
-        $project->fill(['owner_id' => $owner->id, 'owner_type' => $owner->getMorphClass()]);
+        $product->fill(['owner_id' => $owner->id, 'owner_type' => $owner->getMorphClass()]);
     }
 });

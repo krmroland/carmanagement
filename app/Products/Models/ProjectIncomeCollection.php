@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Projects\Models;
+namespace App\Products\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectIncomeCollection extends BaseModel
+class ProductIncomeCollection extends BaseModel
 {
     //
 }
