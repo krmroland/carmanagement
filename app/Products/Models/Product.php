@@ -24,6 +24,15 @@ class Product extends BaseModel
     protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2'];
 
     /**
+     * The product owner relationship
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function owner()
+    {
+        return $this->morphTo('owner');
+    }
+
+    /**
      * A product has many variants
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -19,6 +19,8 @@ class ProductVariantsController extends Controller
      */
     public function store(Request $request, Product $product)
     {
+        $this->authorize('write', $product);
+
         $variant = with($product->variants())->create(
             $request->validate(['identifier' => 'required', 'details' => 'array'])
         );
@@ -36,6 +38,8 @@ class ProductVariantsController extends Controller
      */
     public function update(Request $request, Product $product, $variant)
     {
+        $this->authorize('write', $product);
+
         $variant = with($product->variants()->findOrFail($variant))->update(
             $request->validate(['identifier' => 'required', 'details' => 'array'])
         );
@@ -53,6 +57,8 @@ class ProductVariantsController extends Controller
      */
     public function destroy(Product $product, $variant)
     {
+        $this->authorize('write', $product);
+
         return response()->json([
             'message' => 'Operation was successful',
             'deleted' => with($product->variants()->findOrFail($variant))->delete(),
