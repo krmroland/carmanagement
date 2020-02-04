@@ -17,7 +17,7 @@ class OrganizationsController extends Controller
      */
     public function index()
     {
-        $this->authorize('organizations.view');
+        $this->authorize('admin');
 
         return Organization::paginateByRequest();
     }
@@ -45,8 +45,6 @@ class OrganizationsController extends Controller
      */
     public function show(Organization $organization)
     {
-        $organization->gate()->authorize();
-
         return $organization->loadMissing(['members']);
     }
 

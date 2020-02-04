@@ -30,7 +30,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function actingAsAdmin()
     {
-        Airlock::actingAs(factory(User::class)->create(), ['*']);
+        Airlock::actingAs(factory(User::class)->create(['is_admin' => true]));
 
         return $this;
     }

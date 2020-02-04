@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
                 ->text('phone_number')
                 ->nullable()
                 ->unique();
+            $table->boolean('is_admin')->default(0);
             $table->unsignedBigInteger('total_products')->nullable();
             $table->string('password');
             $table->rememberToken();

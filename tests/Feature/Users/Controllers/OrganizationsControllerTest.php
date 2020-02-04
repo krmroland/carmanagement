@@ -15,7 +15,7 @@ class OrganizationsControllerTest extends TestCase
     {
         factory(Organization::class, 3)->create();
 
-        $this->actingAsUserWithPermission(['organizations.view'])
+        $this->actingAsAdmin()
             ->getJson('/api/v1/organizations')
             ->assertOk()
             ->assertJsonCount(3, 'data');

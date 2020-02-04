@@ -34,5 +34,15 @@ class User extends Authenticatable implements ProductOwner
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => true,
     ];
+
+    /**
+     * Determine if the current user is an administrator
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }
