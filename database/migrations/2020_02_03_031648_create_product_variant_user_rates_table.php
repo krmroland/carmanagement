@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductIncomeCollectionsTable extends Migration
+class CreateProductVariantUserRatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,18 @@ class CreateProductIncomeCollectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_income_collections', function (Blueprint $table) {
+        Schema::create('product_user_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id')->index();
+            $table->unsignedBigInteger('product_variants_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->decimal('amount');
-            $table->string('currency');
-            $table->timestamp('verified_at')->nullable();
-            $table->unsignedBigInteger('verified_by')->nullable();
-            $table->json('details')->nullable();
-            $table->text('reference')->nullable();
-            $table->string('image_path')->nullable();
+            $table->unsignedBigInteger('rate_id')->index();
+            $table->unsignedBigInteger('current_rate_discount')->nullable();
+            $table->unique(['product_variants_id', 'user_id', 'rate_id'])->index();
             $table->timestamps();
             $table
-                ->foreign('product_id')
+                ->foreign('product_variants_id')
                 ->references('id')
-                ->on('products')
+                ->on('product_variantss')
                 ->onDelete('cascade');
 
             $table
@@ -38,10 +34,10 @@ class CreateProductIncomeCollectionsTable extends Migration
                 ->onDelete('cascade');
 
             $table
-                ->foreign('verified_by')
+                ->foreign('rate_id')
                 ->references('id')
-                ->on('users')
-                ->onDelete('set null');
+                ->on('product_variants_rates')
+                ->onDelete('cascade');
         });
     }
 
@@ -52,6 +48,6 @@ class CreateProductIncomeCollectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_income_collections');
+        Schema::dropIfExists('product_user_rates');
     }
 }

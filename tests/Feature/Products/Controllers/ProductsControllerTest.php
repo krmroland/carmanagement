@@ -17,7 +17,9 @@ class ProductsControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $data = factory(Product::class)->raw();
+        $data = factory(Product::class)
+            ->state('withVariantData')
+            ->raw();
 
         $this->actingAs($user)
             ->postJson("api/v1/@{$user->getUniqueName()}/products", $data)
@@ -32,9 +34,12 @@ class ProductsControllerTest extends TestCase
 
         $organization = factory(Organization::class)->create(['user_id' => $user]);
 
-        $data = factory(Product::class)->raw();
+        $data = factory(Product::class)
+            ->state('withVariantData')
+            ->raw();
 
         $this->actingAs($user)
+
             ->postJson("api/v1/@{$organization->getUniqueName()}/products", $data)
             ->assertCreated();
     }
@@ -59,7 +64,9 @@ class ProductsControllerTest extends TestCase
 
         $organization->addMember($user, ['products.write']);
 
-        $data = factory(Product::class)->raw();
+        $data = factory(Product::class)
+            ->state('withVariantData')
+            ->raw();
 
         $this->actingAs($user)
             ->postJson("api/v1/@{$organization->getUniqueName()}/products", $data)

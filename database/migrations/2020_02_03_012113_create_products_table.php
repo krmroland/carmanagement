@@ -19,11 +19,6 @@ class CreateProductsTable extends Migration
             $table->morphs('owner'); //could be organization or user
             $table->string('currency');
             $table->json('details')->nullable();
-            $table->string('image_path')->nullable();
-            $table->string('identifier')->nullable(); // eg number plate for cars
-            $table->unsignedBigInteger('current_user_id')->nullable();
-
-            $table->unique(['identifier', 'owner_type', 'owner_id']);
 
             $table
                 ->decimal('total_cost')
@@ -31,13 +26,8 @@ class CreateProductsTable extends Migration
                 ->nullable();
 
             $table->string('type');
-            $table->timestamps();
 
-            $table
-                ->foreign('current_user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('set null');
+            $table->timestamps();
         });
     }
 

@@ -26,8 +26,12 @@ trait OwnsProducts
 
         return DB::transaction(function () use ($options) {
             $uniqueName = Arr::pull($this->attributes, 'unique_name');
-            parent::save($options);
-            $this->setUniqueName($uniqueName);
+
+            return tap(parent::save($options), function ($saved) use ($uniqueName) {
+                if ($saved) {
+                    $this->setUniqueName($uniqueName);
+                }
+            });
         });
     }
 

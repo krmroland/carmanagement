@@ -27,7 +27,6 @@ class ProductWriteRequest extends BaseProductRequest
             'name' => 'required|string',
             'currency' => 'required',
             'details' => 'array',
-            'identifier' => 'sometimes|nullable',
             'total_cost' => 'numeric',
             'type' => ['required', Rule::in(Product::TYPES)],
         ];

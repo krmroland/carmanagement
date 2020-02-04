@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductDuesTable extends Migration
+class CreateProductVariantDuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateProductDuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_dues', function (Blueprint $table) {
+        Schema::create('product_variant_dues', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_user_rates_id')->index();
+            $table->unsignedBigInteger('product_variant_user_rates_id')->index();
             $table->decimal('amount');
             $table->string('currency');
             $table->string('period');
             $table->timestamps();
 
             $table
-                ->foreign('product_user_rates_id')
+                ->foreign('product_variant_user_rates_id')
                 ->references('id')
-                ->on('product_user_rates')
+                ->on('product_variant_user_rates')
                 ->onDelete('cascade');
         });
     }
@@ -36,6 +36,6 @@ class CreateProductDuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_dues');
+        Schema::dropIfExists('product_variant_dues');
     }
 }

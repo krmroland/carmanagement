@@ -10,6 +10,7 @@ use App\Users\Models\OwnerUniqueName;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Products\ProductReadRequest;
 use App\Http\Requests\Products\ProductWriteRequest;
+use App\Http\Requests\Products\ProductCreateRequest;
 
 class ProductsController extends Controller
 {
@@ -29,7 +30,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductWriteRequest $request, ProductOwner $productOwner)
+    public function store(ProductCreateRequest $request, ProductOwner $productOwner)
     {
         $product = $productOwner->products()->create($request->validated());
 

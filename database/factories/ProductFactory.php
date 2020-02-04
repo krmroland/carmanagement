@@ -6,14 +6,19 @@ use App\Users\Models\User;
 use Faker\Generator as Faker;
 use App\Products\Models\Product;
 use App\Users\Models\Organization;
+use App\Products\Models\ProductVariant;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'type' => $faker->randomElement(['house', 'car']),
-        'image_path' => $faker->optional()->imageUrl(200, 200, 'transport'),
-        'identifier' => $faker->optional()->domainWord,
         'currency' => 'UGX',
+    ];
+});
+
+$factory->state(Product::class, 'withVariantData', function (Faker $faker) {
+    return [
+        'variant_fields' => factory(ProductVariant::class)->raw(),
     ];
 });
 

@@ -3,23 +3,16 @@
 namespace App\Products\Models;
 
 use App\Models\BaseModel;
-use App\Currencies\HasCurrency;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends BaseModel
+class ProductVariant extends BaseModel
 {
-    use HasCurrency;
     /**
      * The casts array
      * @var array
      */
-    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2'];
-
-    /**
-     * The available product types
-     */
-    public const TYPES = ['car', 'house'];
+    protected $casts = ['details' => 'json'];
     /**
      * Hooks into the eloquent booting process
      * @return void
@@ -44,10 +37,10 @@ class Product extends BaseModel
         }
 
         return validator()->validate($this->only('identifier'), [
-            'identifier' => Rule::unique('products')
+            'identifier' => Rule::unique('product_variants')
                 ->ignore($this->id)
                 ->where(function ($query) {
-                    $query->where($this->only(['owner_id', 'owner_type']));
+                    $query->where($this->only(['product_id']));
                 }),
         ]);
     }
