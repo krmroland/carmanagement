@@ -17,7 +17,7 @@ class ProductVariantsControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create($user->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($user->getMorphAttributes('owner'));
 
         $data = factory(ProductVariant::class)->raw();
 
@@ -33,7 +33,7 @@ class ProductVariantsControllerTest extends TestCase
         $user = factory(User::class)->create();
 
         $product = factory(Product::class)->create(
-            with(factory(User::class)->create())->getMorhpAttributes('owner')
+            with(factory(User::class)->create())->getMorphAttributes('owner')
         );
 
         $data = factory(ProductVariant::class)->raw();
@@ -49,7 +49,7 @@ class ProductVariantsControllerTest extends TestCase
 
         $organizaton = factory(Organization::class)->create();
 
-        $product = factory(Product::class)->create($organizaton->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($organizaton->getMorphAttributes('owner'));
 
         $data = factory(ProductVariant::class)->raw();
 
@@ -66,7 +66,7 @@ class ProductVariantsControllerTest extends TestCase
 
         $organizaton->addMember($user, ['products.write']);
 
-        $product = factory(Product::class)->create($organizaton->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($organizaton->getMorphAttributes('owner'));
 
         $data = factory(ProductVariant::class)->raw();
 
@@ -79,7 +79,7 @@ class ProductVariantsControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create($user->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($user->getMorphAttributes('owner'));
 
         $variant = factory(ProductVariant::class)->create(['product_id' => $product]);
 
@@ -96,7 +96,7 @@ class ProductVariantsControllerTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create($user->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($user->getMorphAttributes('owner'));
 
         $variant = factory(ProductVariant::class)->create(['product_id' => $product]);
 

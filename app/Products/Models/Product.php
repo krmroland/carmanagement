@@ -18,10 +18,16 @@ class Product extends BaseModel
     public const TYPES = ['car', 'house'];
 
     /**
+     * The touches array
+     * @var array
+     */
+    protected $touches = ['owner'];
+
+    /**
      * The casts array
      * @var array
      */
-    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2'];
+    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:8,2', 'owner_id' => 'int'];
 
     /**
      * The product owner relationship

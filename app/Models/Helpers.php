@@ -140,7 +140,7 @@ trait Helpers
      * Gets the morph attributes
      * @return array
      */
-    public function getMorhpAttributes($morph)
+    public function getMorphAttributes($morph)
     {
         return [
             "{$morph}_id" => $this->getKey(),

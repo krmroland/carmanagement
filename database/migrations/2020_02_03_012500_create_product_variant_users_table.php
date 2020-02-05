@@ -15,11 +15,13 @@ class CreateProductVariantUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_variant_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->timestamp('joined_at')->nullable();
-            $table->timestamp('left_at')->nullable();
-            $table->timestamp('billing_starts_on')->nullable();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
+            $table->timestamp('accepted_at')->nullable();
             $table->decimal('due_amount')->nullable();
             $table->decimal('paid_amount')->nullable();
+
+            $table->unique(['product_variant_id', 'user_id']);
 
             $table
                 ->foreign('product_variant_id')

@@ -11,7 +11,7 @@ class CreateProductVariantUserRatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_user_rates', function (Blueprint $table) {
+        Schema::create('product_variant_user_rates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_variants_id')->index();
             $table->unsignedBigInteger('user_id')->index();
@@ -22,7 +22,7 @@ class CreateProductVariantUserRatesTable extends Migration
             $table
                 ->foreign('product_variants_id')
                 ->references('id')
-                ->on('product_variantss')
+                ->on('product_variants')
                 ->onDelete('cascade');
 
             $table
@@ -34,7 +34,7 @@ class CreateProductVariantUserRatesTable extends Migration
             $table
                 ->foreign('rate_id')
                 ->references('id')
-                ->on('product_variants_rates')
+                ->on('product_variant_rates')
                 ->onDelete('cascade');
         });
     }
@@ -44,6 +44,6 @@ class CreateProductVariantUserRatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_user_rates');
+        Schema::dropIfExists('product_variant_user_rates');
     }
 }

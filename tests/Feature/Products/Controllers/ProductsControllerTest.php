@@ -95,7 +95,7 @@ class ProductsControllerTest extends TestCase
 
         $user = factory(User::class)->create();
 
-        factory(Product::class, 3)->create($user->getMorhpAttributes('owner'));
+        factory(Product::class, 3)->create($user->getMorphAttributes('owner'));
 
         $this->actingAs($user)
             ->getJson("api/v1/@{$user->getUniqueName()}/products")
@@ -112,7 +112,7 @@ class ProductsControllerTest extends TestCase
 
         $organization = factory(Organization::class)->create();
 
-        factory(Product::class, 2)->create($organization->getMorhpAttributes('owner'));
+        factory(Product::class, 2)->create($organization->getMorphAttributes('owner'));
 
         $this->actingAs($user)
             ->getJson("api/v1/@{$organization->getUniqueName()}/products")
@@ -124,7 +124,7 @@ class ProductsControllerTest extends TestCase
         // two for some other users
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create($user->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($user->getMorphAttributes('owner'));
 
         $this->actingAs($user)
             ->getJson("api/v1/@{$user->getUniqueName()}/products/{$product->id}")
@@ -137,7 +137,7 @@ class ProductsControllerTest extends TestCase
         // two for some other users
         $user = factory(User::class)->create();
 
-        $product = factory(Product::class)->create($user->getMorhpAttributes('owner'));
+        $product = factory(Product::class)->create($user->getMorphAttributes('owner'));
 
         $data = factory(Product::class)->raw();
 

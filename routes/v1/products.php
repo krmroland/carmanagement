@@ -7,3 +7,5 @@ Route::apiResource('products.variants', ProductVariantsController::class)->only(
     'update',
     'destroy',
 ]);
+
+Route::post('productVariants/{productVariant}/users', AddProductVariantUserController::class);
