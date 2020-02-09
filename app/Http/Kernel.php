@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\JSONMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Laravel\Airlock\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Fruitcake\Cors\HandleCors::class,
         ],
     ];
 
