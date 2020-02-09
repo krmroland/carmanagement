@@ -5,3 +5,5 @@ Route::middleware('auth:airlock')
     ->group(base_path('routes/v1/all.php'));
 
 Route::post('v1/auth/register', 'Auth\UserRegistrationController@register');
+Route::post('v1/auth/token', Auth\IssueOAuthTokensController::class);
+

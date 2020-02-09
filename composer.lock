@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19af9be3c2c85f0615c3a65595da1b7e",
+    "content-hash": "c12751a6d4df5c78ff3a2a401afe778b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -543,16 +543,16 @@
         },
         {
             "name": "laravel/airlock",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/airlock.git",
-                "reference": "b171099d32c43c43ae65fff20fa66ee8ff140b13"
+                "reference": "f246dfab0fe0103a9db731511b89e69e4fdf87eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/airlock/zipball/b171099d32c43c43ae65fff20fa66ee8ff140b13",
-                "reference": "b171099d32c43c43ae65fff20fa66ee8ff140b13",
+                "url": "https://api.github.com/repos/laravel/airlock/zipball/f246dfab0fe0103a9db731511b89e69e4fdf87eb",
+                "reference": "f246dfab0fe0103a9db731511b89e69e4fdf87eb",
                 "shasum": ""
             },
             "require": {
@@ -599,7 +599,7 @@
                 "auth",
                 "laravel"
             ],
-            "time": "2020-01-22T21:09:31+00:00"
+            "time": "2020-01-28T21:03:57+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7245,9 +7245,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "laravel/airlock": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
