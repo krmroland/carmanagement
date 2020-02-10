@@ -7,13 +7,11 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
         User::updateOrCreate(
-            [ 'email' => 'admin@rentals.com'],
+            ['email' => 'admin@rentals.com'],
             ['password' => bcrypt('password'), 'name' => 'Admin']
         );
     }

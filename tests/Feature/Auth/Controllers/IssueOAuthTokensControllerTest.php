@@ -11,7 +11,7 @@ class IssueOAuthTokensControllerTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function test_it_exchanges_a_righ_username_and_password_with_token()
+    public function testItExchangesARighUsernameAndPasswordWithToken()
     {
         $user = factory(User::class)->create();
 
@@ -20,8 +20,7 @@ class IssueOAuthTokensControllerTest extends TestCase
             'password' => 'password',
             'device_name' => $this->faker()->userAgent,
         ])
-        ->dump()
-            ->assertOk()
-          ;
+            ->dump()
+            ->assertOk();
     }
 }
