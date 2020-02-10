@@ -1,21 +1,43 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
-  "main": "webpack.mix.js",
-  "directories": {
-    "test": "tests"
-  },
-  "scripts": {
-    "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\"",
-    "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php\"",
-    "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\" "
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@prettier/plugin-php": "^0.12.0",
-    "prettier": "^1.19.1"
-  }
+    "name": "api",
+    "version": "1.0.0",
+    "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
+    "main": "webpack.mix.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\"",
+        "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php\"",
+        "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\" ",
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
+        "@prettier/plugin-php": "^0.12.0",
+        "cross-env": "^7.0.0",
+        "laravel-mix": "^4.0.14",
+        "laravel-mix-purgecss": "^4.1",
+        "laravel-mix-tailwind": "^0.1.0",
+        "prettier": "^1.19.1",
+        "resolve-url-loader": "^3.1.1",
+        "sass": "^1.25.0",
+        "sass-loader": "^8.0.2",
+        "tailwindcss": "^1.0",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
+    }
 }
