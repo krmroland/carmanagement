@@ -1,3 +1,4 @@
+const path = require('path');
 const mix = require('laravel-mix');
 
 require('laravel-mix-tailwind');
@@ -14,10 +15,19 @@ require('laravel-mix-purgecss');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css')
-    .tailwind('./tailwind.config.js');
+mix
+  .webpackConfig({
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'resources/assets/ui'),
+      },
+    },
+  })
+  .react('resources/ui/main.js', 'public/js/app.js')
+  .postCss('resources/css/app.css', 'public/css')
+  .tailwind('./tailwind.config.js')
+  .extract();
 
 if (mix.inProduction()) {
-    mix.version().purgeCss();
+  mix.version().purgeCss();
 }
