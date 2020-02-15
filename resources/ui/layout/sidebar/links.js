@@ -27,23 +27,25 @@ const list = [
 
 export default ({ onClickItem }) => {
   return (
-    <List className="pt-0">
-      {list.map(({ label, icon }, i) => (
-        <ListItem key={label} selected={i === 0} button onClick={onClickItem}>
-          <ListItemIcon>
-            <Icon>{icon}</Icon>
-          </ListItemIcon>
-          <ListItemText primary={label} primaryTypographyProps={{ noWrap: true }} />
-        </ListItem>
-      ))}
+    <React.Fragment>
+      <List className="pt-0">
+        {list.map(({ label, icon }, i) => (
+          <ListItem key={label} selected={i === 0} button onClick={onClickItem}>
+            <ListItemIcon>
+              <Icon>{icon}</Icon>
+            </ListItemIcon>
+            <ListItemText primary={label} primaryTypographyProps={{ noWrap: true }} />
+          </ListItem>
+        ))}
 
-      <Divider className="m-0" />
-      <ListItem button onClick={onClickItem}>
-        <ListItemIcon>
-          <Settings />
-        </ListItemIcon>
-        <ListItemText primary="Settings & account" primaryTypographyProps={{ noWrap: true }} />
-      </ListItem>
-    </List>
+        <Divider className="m-0" />
+        <ListItem button onClick={onClickItem}>
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="Settings & account" primaryTypographyProps={{ noWrap: true }} />
+        </ListItem>
+      </List>
+    </React.Fragment>
   );
 };

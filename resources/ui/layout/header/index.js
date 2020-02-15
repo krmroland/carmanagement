@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Search from '@material-ui/icons/Search';
 import MoreVert from '@material-ui/icons/MoreVert';
+
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(({ spacing, transitions, breakpoints, palette, shape }) => ({
   search: {
@@ -59,8 +60,15 @@ export default ({ screen, collapsed }) => {
   return (
     <div className="flex w-full">
       {!collapsed && (
-        <Typography noWrap color="textSecondary" className="font-black text-xl min-w-0">
-          My Rentals
+        <Typography
+          noWrap
+          color="textSecondary"
+          className="text-xl min-w-0"
+          component={Link}
+          variant="h5"
+          to="/"
+        >
+          Projects
         </Typography>
       )}
 

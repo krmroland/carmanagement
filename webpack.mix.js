@@ -19,7 +19,7 @@ mix
   .webpackConfig({
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, 'resources/assets/ui'),
+        '@': path.resolve(__dirname, 'resources/ui'),
       },
     },
   })

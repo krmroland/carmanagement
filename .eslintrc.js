@@ -25,6 +25,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'import/prefer-default-export': 0,
     'no-console': 0,
+    'prefer-destructuring': 0,
     'object-curly-newline': 0,
     'no-unused-expressions': 0,
     'react/no-unescaped-entities': 0,
@@ -36,12 +37,13 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/jsx-fragments': 0,
     'react/destructuring-assignment': 0,
+    'react/jsx-wrap-multilines': 0,
   },
   settings: {
     'import/extensions': ['.js', '.jsx'],
     'import/resolver': {
       alias: {
-        map: [['@@', './src']],
+        map: [['@', './resources/ui']],
         extensions: ['.ts', '.js', '.jsx', '.json'],
       },
     },

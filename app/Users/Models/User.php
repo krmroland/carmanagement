@@ -76,4 +76,13 @@ class User extends Authenticatable implements ProductOwner
             });
         });
     }
+
+    /**
+     * The owned organizations
+     * @return BelongsTo
+     */
+    public function organizations()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }
