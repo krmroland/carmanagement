@@ -1,15 +1,29 @@
 {
-  "name": "api",
+  "name": "web",
   "version": "1.0.0",
-  "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",
-  "main": "webpack.mix.js",
+  "description": "I am yet to start working with a car manager, how about having a system to begin with?",
+  "main": ".babelrc.js",
   "directories": {
     "test": "tests"
   },
+  "dependencies": {
+    "@vue/composition-api": "^0.4.0",
+    "axios": "^0.19.2",
+    "cross-env": "^7.0.0",
+    "laravel-mix": "^5.0.1",
+    "resolve-url-loader": "3.1.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "tailwindcss": "^1.2.0",
+    "vue": "^2.6.11",
+    "vue-next": "^0.0.1",
+    "vue-router": "^3.1.5",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify": "^2.2.14",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {},
   "scripts": {
-    "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\"",
-    "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php\"",
-    "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\" ",
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run development -- --watch",
@@ -18,42 +32,15 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krmroland/renatal-management.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/preset-react": "^7.0.0",
-    "@prettier/plugin-php": "^0.12.0",
-    "babel-plugin-import": "^1.13.0",
-    "cross-env": "^7.0.0",
-    "eslint": "^5.16.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "laravel-mix-purgecss": "^4.1",
-    "laravel-mix-tailwind": "^0.1.0",
-    "prettier": "^1.19.1",
-    "prop-types": "^15.7.2",
-    "resolve-url-loader": "^3.1.1",
-    "sass": "^1.25.0",
-    "sass-loader": "^8.0.2",
-    "tailwindcss": "^1.0"
+  "bugs": {
+    "url": "https://github.com/krmroland/renatal-management/issues"
   },
-  "dependencies": {
-    "@material-ui/core": "^4.9.2",
-    "@material-ui/icons": "^4.9.1",
-    "@mui-treasury/layout": "^3.3.3",
-    "@mui-treasury/mockup": "^0.4.2",
-    "axios": "^0.19.2",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-react": "^7.14.3",
-    "laravel-mix": "^5.0.1",
-    "lodash": "^4.17.15",
-    "mdi-material-ui": "^6.11.0",
-    "mdi-react": "^6.7.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "recharts": "^2.0.0-beta.1"
-  }
+  "homepage": "https://github.com/krmroland/renatal-management#readme"
 }

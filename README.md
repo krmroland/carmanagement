@@ -1,3 +1,3 @@
-#### Car Management System
+#### Rentals Management System
 
-I am yet to start working with a car manager, how about having a system to begin with?
+I am yet to start working with a car manager, how about having a rental(s)-management system to begin with?

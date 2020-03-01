@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Users\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -64,5 +66,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * The user has been registered.
+     */
+    protected function registered(Request $request, $user)
+    {
+        return Response::json([
+            'message' => 'User was registered successfully',
+            'user' => $user,
+        ])->setStatusCode(201);
     }
 }

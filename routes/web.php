@@ -11,8 +11,14 @@
 |
 */
 
+//Route::get('/', HomeController::class)->name('home');
+
+Route::prefix('auth')
+    ->get('/{any}', HomeController::class)
+    ->middleware('guest');
+
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/{any}', 'HomeController@index')->where('any', '.*');
+Route::get('/{any}', HomeController::class)
+    ->where('any', '.*')
+    ->middleware(['auth']);

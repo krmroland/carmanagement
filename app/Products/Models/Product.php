@@ -3,6 +3,7 @@
 namespace App\Products\Models;
 
 use App\Models\BaseModel;
+use App\Users\Models\User;
 use Illuminate\Support\Arr;
 use App\Currencies\HasCurrency;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class Product extends BaseModel
      * The touches array
      * @var array
      */
-    protected $touches = ['owner'];
+    protected $touches = ['user'];
 
     /**
      * The casts array
@@ -33,9 +34,9 @@ class Product extends BaseModel
      * The product owner relationship
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function owner()
+    public function user()
     {
-        return $this->morphTo('owner');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**

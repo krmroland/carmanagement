@@ -3,7 +3,6 @@
 namespace App\Users\Models;
 
 use App\Models\Helpers;
-use App\Users\OwnsProducts;
 use Illuminate\Support\Arr;
 use App\Contracts\ProductOwner;
 use App\Products\Models\Product;
@@ -14,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements ProductOwner
 {
-    use Notifiable, HasApiTokens, Helpers, OwnsProducts;
+    use Notifiable, HasApiTokens, Helpers;
 
     /**
      * The attributes that are mass assignable.
@@ -78,11 +77,11 @@ class User extends Authenticatable implements ProductOwner
     }
 
     /**
-     * The owned organizations
-     * @return BelongsTo
+     * The products relationship
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function organizations()
+    public function products()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->hasMany(Product::class);
     }
 }

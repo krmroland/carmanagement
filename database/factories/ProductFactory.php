@@ -13,6 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'name' => $faker->company,
         'type' => $faker->randomElement(['house', 'car']),
         'currency' => 'UGX',
+        'user_id' => factory(User::class),
     ];
 });
 
@@ -20,14 +21,4 @@ $factory->state(Product::class, 'withVariantData', function (Faker $faker) {
     return [
         'variant_fields' => factory(ProductVariant::class)->raw(),
     ];
-});
-
-$factory->afterMaking(Product::class, function ($product, Faker $faker) {
-    if (!array_key_exists('owner_id', $product->getAttributes())) {
-        $class = $faker->randomElement([Organization::class, User::class]);
-
-        $owner = factory($class)->create();
-
-        $product->fill(['owner_id' => $owner->id, 'owner_type' => $owner->getMorphClass()]);
-    }
 });

@@ -3,34 +3,25 @@
 namespace App\Http\Controllers\Products;
 
 use Illuminate\Http\Request;
-use App\Contracts\ProductOwner;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use App\Http\Requests\Products\ProductReadRequest;
-use App\Http\Requests\Products\ProductWriteRequest;
-use App\Http\Requests\Products\ProductCreateRequest;
+use App\Http\Requests\Products\CreateProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(ProductReadRequest $request, ProductOwner $productOwner)
-    {
-        return $productOwner->products()->paginateByRequest();
-    }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCreateRequest $request, ProductOwner $productOwner)
+    public function store(CreateProductRequest $request)
     {
-        $product = $productOwner->products()->create($request->validated());
+        $product = Auth::user()
+            ->products()
+            ->create($request->validated());
 
         return Response::json(
             ['message' => 'Product was created successfully', 'product' => $product],
@@ -44,9 +35,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductReadRequest $request, ProductOwner $productOwner, $id)
+    public function show($id)
     {
-        return $productOwner->products()->findOrFail($id);
+        return Auth::user()
+            ->products()
+            ->findOrFail($id);
     }
 
     /**
@@ -56,9 +49,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductWriteRequest $request, ProductOwner $productOwner, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        return $productOwner
+        return Auth::user()
             ->products()
             ->findOrFail($id)
             ->persistAttributes($request->validated());
