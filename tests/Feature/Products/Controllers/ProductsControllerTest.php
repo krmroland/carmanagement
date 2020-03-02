@@ -5,7 +5,6 @@ namespace Tests\Feature\Products\Controllers;
 use Tests\TestCase;
 use App\Users\Models\User;
 use App\Products\Models\Product;
-use App\Users\Models\Organization;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductsControllerTest extends TestCase

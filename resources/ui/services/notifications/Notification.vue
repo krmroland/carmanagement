@@ -11,19 +11,11 @@
 export default {
   mounted() {
     window.Notify.emitter.$on('globalNotifcations', payload => {
-      const {
-        message,
-        type: color,
-        close = false,
-        top = true,
-        timeout = 4000,
-        ...otherProps
-      } = payload;
+      const { message, close = false, top = true, timeout = 4000, ...otherProps } = payload;
 
       this.isShowing = true;
       this.message = message;
       this.props = Object.assign({}, this.props, otherProps, {
-        color,
         timeout: close ? 0 : timeout,
         top,
         close,

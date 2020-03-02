@@ -4,14 +4,13 @@ namespace Tests\Feature\Auth\Controllers;
 
 use Tests\TestCase;
 use App\Users\Models\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_logs_in_a_user_through_api()
+    public function testItLogsInAUserThroughApi()
     {
         $user = factory(User::class)->create();
 

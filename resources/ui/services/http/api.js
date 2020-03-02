@@ -9,20 +9,9 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-api.interceptors.request.use(
-  config => {
-    // Do something before request is sent
-    return config;
-  },
-  error => {
-    // Do something with request error
-    return Promise.reject(error);
-  },
-);
-
 // Add a response interceptor
 api.interceptors.response.use(
-  response => response,
+  response => Promise.resolve(response),
   error => {
     // run a notification
     const message = get(
@@ -30,9 +19,11 @@ api.interceptors.response.use(
       'response.data.message',
       get(error, 'message', 'Something went wrong'),
     );
+
     if (message && window.Notify) {
       window.Notify.emit(message, null);
     }
+
     return Promise.reject(error);
   },
 );

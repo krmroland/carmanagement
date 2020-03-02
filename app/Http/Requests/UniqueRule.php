@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Unique;
 
 class UniqueRule extends Unique
@@ -17,6 +18,19 @@ class UniqueRule extends Unique
             $this->ignore($id, $column);
         }
 
+        return $this;
+    }
+
+    /**
+     * Scopes the unique rule to the currently authenticated user
+     * @param  string $column
+     * @return $this
+     */
+    public function forAuthenticatedUser($column = 'user_id')
+    {
+        if ($user = Auth::user()) {
+            $this->where($column, $user->id);
+        }
         return $this;
     }
 

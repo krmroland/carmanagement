@@ -5,7 +5,6 @@
 use App\Users\Models\User;
 use Faker\Generator as Faker;
 use App\Products\Models\Product;
-use App\Users\Models\Organization;
 use App\Products\Models\ProductVariant;
 
 $factory->define(Product::class, function (Faker $faker) {

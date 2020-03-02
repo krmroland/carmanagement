@@ -26,9 +26,9 @@ export const useForm = (options = { data: {} }) => {
 
   const errors = reactive({});
 
-  const clearErrors = () => {
-    for (let field in errors) {
-      delete errors[field];
+  const clearItems = items => {
+    for (let field in items) {
+      delete items[field];
     }
   };
 
@@ -40,17 +40,23 @@ export const useForm = (options = { data: {} }) => {
     }
     loading.value = true;
 
-    clearErrors();
+    clearItems(errors);
 
     return http[method](url, json)
       .then(response => {
         loading.value = false;
+
+        clearItems(fields);
+
         if (isFunction(options.onSuccess)) {
-          return options.onSuccess(response);
+          options.onSuccess(response);
         }
+
+        return Promise.resolve(response);
       })
       .catch(error => {
         loading.value = false;
+
         Object.assign(errors, extractResponseErrors(error));
 
         if (isFunction(options.onError)) {

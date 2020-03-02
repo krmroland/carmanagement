@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <custom-notification />
     <v-navigation-drawer v-model="drawer" app dark color="primary">
       <v-toolbar color="primary" tile class="items-center justify-center" elevation="1">
         <v-toolbar-title class="text-2xl font-extrabold mt-1">
@@ -37,14 +38,17 @@
         <v-avatar size="32px">
           <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify" />
         </v-avatar>
-        Ahimbisibwe Roland
+        <span v-if="$vuetify.breakpoint.lgAndUp">
+          Ahimbisibwe Roland
+        </span>
+
         <v-icon large>
           mdi-chevron-down
         </v-icon>
       </v-btn>
       <div class="mr-4"></div>
     </v-app-bar>
-    <div class=" fill-height bg-gray-200">
+    <div class="bg-gray-200 fill-height">
       <v-content>
         <v-container fluid>
           <router-view />

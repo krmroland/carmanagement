@@ -1,39 +1,52 @@
 <template>
-  <div class="mt-2">
-    <div class="mb-5 flex items-center">
-      <v-btn depressed color="primary" large>
+  <div class="mt-2 h-full">
+    <div class="mb-5 md:flex items-center">
+      <v-btn
+        depressed
+        color="primary"
+        large
+        @click="isCreating = !isCreating"
+        class="mb-3 md:mb-0"
+        :block="$vuetify.breakpoint.xsOnly"
+      >
         New Tenant
       </v-btn>
+      <new-tenant :is-open.sync="isCreating" @created="handleCreated" />
       <v-spacer />
       <v-text-field
         hide-details
         outlined
         placeholder="Search"
         solo
-        rounded
-        prepend-inner-icon="mdi-magnify"
+        prepend-inner-icon="mdi-account-search-outline"
       />
       <v-spacer />
     </div>
 
-    <v-simple-table flat>
+    <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
             <th class="text-left">#</th>
             <th class="text-left">Name</th>
-            <th class="text-left">Calories</th>
+            <th class="text-left" v-if="$vuetify.breakpoint.mdAndUp">Email</th>
+            <th class="text-left" v-if="$vuetify.breakpoint.mdAndUp">Phone Number</th>
+            <th class="text-left">Dues</th>
+            <th class="text-left">Product</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.name" class="mb-5 ">
+          <tr v-for="item in data" :key="item.id" class="mb-5 ">
             <td>
               <v-avatar size="32px" item large>
                 <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"
               /></v-avatar>
             </td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.calories }}</td>
+            <td>{{ item.first_name }}</td>
+            <td v-if="$vuetify.breakpoint.mdAndUp">{{ item.email }}</td>
+            <td v-if="$vuetify.breakpoint.mdAndUp">{{ item.phone_number }}</td>
+            <td>{{ item.total_dues }}</td>
+            <td></td>
           </tr>
         </tbody>
       </template>
@@ -41,52 +54,27 @@
   </div>
 </template>
 <script>
+import { http } from '@/services/http';
 export default {
+  components: {
+    NewTenant: require('./create').default,
+  },
+  mounted() {
+    http.get('api/v1/tenants').then(({ data: { data } }) => {
+      this.data = data;
+    });
+  },
   data() {
     return {
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          calories: 159,
-        },
-        {
-          name: 'Ice cream sandwich',
-          calories: 237,
-        },
-        {
-          name: 'Eclair',
-          calories: 262,
-        },
-        {
-          name: 'Cupcake',
-          calories: 305,
-        },
-        {
-          name: 'Gingerbread',
-          calories: 356,
-        },
-        {
-          name: 'Jelly bean',
-          calories: 375,
-        },
-        {
-          name: 'Lollipop',
-          calories: 392,
-        },
-        {
-          name: 'Honeycomb',
-          calories: 408,
-        },
-        {
-          name: 'Donut',
-          calories: 452,
-        },
-        {
-          name: 'KitKat',
-          calories: 518,
-        },
-      ],
+      data: [],
+      isCreating: false,
     };
+  },
+  methods: {
+    handleCreated(tenant) {
+      this.isCreating = false;
+      window.Notify.success('Tenant was created successfully');
+    },
   },
 };
 </script>
