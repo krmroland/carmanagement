@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Throwable;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -31,7 +32,7 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -43,7 +44,7 @@ class Handler extends ExceptionHandler
      * @throws \Exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException) {
             return response()->json(['message' => 'Resource item not found.'], 404);

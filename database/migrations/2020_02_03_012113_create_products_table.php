@@ -14,21 +14,18 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->index();
-            $table->bigInteger('user_id')->unsigned();
             $table->string('currency');
             $table->json('details')->nullable();
-
-            with($table->decimal('total_cost')->unsigned())->nullable();
-
+            $table->unsignedBigInteger('total_cost')->default(0);
             $table->decimal('total_dues')->nullable();
-
+            $table->decimal('total_collections')->nullable();
             $table->string('type');
+            $table->foreignId('account_id')->onDelete('cascade');
 
             $table
-                ->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+                ->foreignId('user_id')
+                ->nullable()
+                ->onDelete('set null');
 
             $table->timestamps();
         });

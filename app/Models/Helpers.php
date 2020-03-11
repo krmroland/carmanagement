@@ -160,15 +160,6 @@ trait Helpers
     }
 
     /**
-     * Serialize all dates to use ISO-8601 timestamps
-     * @return string
-     */
-    protected function serializeDate(\DateTimeInterface $date)
-    {
-        return $date->format('c');
-    }
-
-    /**
      * Return a timestamp as DateTime object.
      *
      * @return \Illuminate\Support\Carbon

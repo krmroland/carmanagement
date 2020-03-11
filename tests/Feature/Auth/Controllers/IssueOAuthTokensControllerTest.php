@@ -19,6 +19,7 @@ class IssueOAuthTokensControllerTest extends TestCase
             'email' => $user->email,
             'password' => 'password',
             'device_name' => $this->faker()->userAgent,
+            'device_id' => $this->faker()->uuid(),
         ])
             ->dump()
             ->assertOk();

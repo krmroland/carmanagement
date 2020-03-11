@@ -21,6 +21,7 @@ class IssueOAuthTokensController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'required',
+            'device_id' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -31,6 +32,14 @@ class IssueOAuthTokensController extends Controller
             ]);
         }
 
-        return $user->createToken($request->device_name)->plainTextToken;
+        $token = $user->createToken([
+            'name' => $request->device_name,
+            'device_id' => $request->device_id,
+        ])->plainTextToken;
+
+        return response()->json([
+            'token' => $token,
+            'user' => $user->loadMissing(['account', 'organizations.account']),
+        ]);
     }
 }

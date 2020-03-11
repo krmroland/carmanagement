@@ -50,17 +50,4 @@ class UserActionsTest extends TestCase
 
         $variant->userActions()->add($user);
     }
-
-    public function testAddingProductOwnerFails()
-    {
-        $user = factory(User::class)->create();
-
-        $variant = factory(ProductVariant::class)->create([
-            'product_id' => factory(Product::class)->create($user->getMorphAttributes('owner')),
-        ]);
-
-        $this->expectException(ValidationException::class);
-
-        $variant->userActions()->add($user);
-    }
 }

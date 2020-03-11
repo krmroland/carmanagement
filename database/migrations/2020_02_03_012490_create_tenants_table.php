@@ -12,8 +12,7 @@ class CreateTenantsTable extends Migration
     public function up()
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->index();
+            $table->id('id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
@@ -24,10 +23,9 @@ class CreateTenantsTable extends Migration
             $table->unsignedBigInteger('current_product_variant_id')->nullable();
 
             $table
-                ->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+                ->foreignId('user_id')
+                ->nullable()
+                ->onDelete('set null');
 
             $table
                 ->foreign('current_product_variant_id')

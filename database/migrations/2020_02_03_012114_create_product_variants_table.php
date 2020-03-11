@@ -12,25 +12,18 @@ class CreateProductVariantsTable extends Migration
     public function up()
     {
         Schema::create('product_variants', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id')->index();
+            $table->id();
+
             $table->string('identifier'); // eg number plate for cars
             $table->json('details')->nullable();
             $table->string('image_path')->nullable();
-            $table->unsignedBigInteger('current_user_id')->nullable();
+            $table->unsignedBigInteger('current_tenant_id')->nullable();
             $table->unique(['identifier', 'product_id']);
             $table->timestamps();
 
             $table
-                ->foreign('current_user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('set null');
-
-            $table
-                ->foreign('product_id')
-                ->references('id')
-                ->on('products')
+                ->foreignId('product_id')
+                ->index()
                 ->onDelete('restrict');
         });
     }
