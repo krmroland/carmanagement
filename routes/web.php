@@ -13,6 +13,24 @@
 
 //Route::get('/', HomeController::class)->name('home');
 
+// Route::get('/', function () {
+//     // Establish username and password for bucket-access
+//     $authenticator = new \Couchbase\PasswordAuthenticator();
+//     $authenticator->username('Administrator')->password('havatech@123');
+//     // Connect to Couchbase Server - using address of a KV (data) node
+//     $cluster = new CouchbaseCluster('couchbase://127.0.0.1');
+
+//     // Authenticate, then open bucket
+//     $cluster->authenticate($authenticator);
+
+//     // $bucket = $cluster->openBucket('test');
+//     //
+
+//     $bucket = $cluster->openBucket('test');
+
+//     dd($bucket);
+// });
+
 Route::prefix('auth')
     ->get('/{any}', HomeController::class)
     ->middleware('guest');
