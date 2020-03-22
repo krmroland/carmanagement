@@ -4,7 +4,7 @@ namespace App\Products\Models;
 
 use App\Models\BaseModel;
 use App\Models\BasePivot;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Validation\Rule;
 use App\Products\Variants\UserActions;
 

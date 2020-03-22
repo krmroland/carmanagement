@@ -37,10 +37,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Relation::morphMap([
-            'user' => \App\Users\Models\User::class,
+            'user' => \App\Users\Entities\User::class,
             'organization' => \App\Users\Models\Organization::class,
         ]);
 
         Route::model('productOwner', \App\Users\Models\OwnerUniqueName::class);
+
+
+        \DB::listen(fn($query)=>info($query->sql,$query->bindings,$query->time));
     }
 }

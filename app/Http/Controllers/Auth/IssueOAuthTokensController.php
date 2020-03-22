@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +21,6 @@ class IssueOAuthTokensController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'required',
-            'device_id' => 'required',
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -32,10 +31,7 @@ class IssueOAuthTokensController extends Controller
             ]);
         }
 
-        $token = $user->createToken([
-            'name' => $request->device_name,
-            'device_id' => $request->device_id,
-        ])->plainTextToken;
+        $token = $user->createToken($request->device_name)->plainTextToken;
 
         return response()->json([
             'token' => $token,

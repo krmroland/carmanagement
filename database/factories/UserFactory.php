@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 

@@ -1,6 +1,6 @@
 <?php
 
-Route::middleware('auth:airlock')
+Route::middleware('auth:sanctum')
     ->prefix('v1')
     ->group(base_path('routes/v1/all.php'));
 

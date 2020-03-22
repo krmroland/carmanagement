@@ -3,7 +3,7 @@
 namespace Tests\Feature\Auth\Controllers;
 
 use Tests\TestCase;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -21,7 +21,7 @@ class IssueOAuthTokensControllerTest extends TestCase
             'device_name' => $this->faker()->userAgent,
             'device_id' => $this->faker()->uuid(),
         ])
-            ->dump()
+
             ->assertOk();
     }
 }

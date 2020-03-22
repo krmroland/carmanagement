@@ -3,7 +3,7 @@
 namespace Tests\Feature\Users\Models;
 
 use Tests\TestCase;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use App\Users\Models\Organization;
 use App\Users\Models\OwnerUniqueName;
 use Illuminate\Validation\ValidationException;

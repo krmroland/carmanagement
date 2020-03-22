@@ -2,13 +2,13 @@
 
 namespace App\Products\Variants;
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 
 class UserActions extends VariantActions
 {
     /**
      * Returns the current user
-     * @return \App\Users\Models\User|null
+     * @return \App\Users\Entities\User|null
      */
     public function current()
     {

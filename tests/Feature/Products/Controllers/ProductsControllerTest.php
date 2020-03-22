@@ -3,7 +3,7 @@
 namespace Tests\Feature\Products\Controllers;
 
 use Tests\TestCase;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use App\Products\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

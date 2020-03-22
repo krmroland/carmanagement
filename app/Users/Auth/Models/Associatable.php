@@ -3,10 +3,10 @@
 namespace App\Users\Auth\Models;
 
 use App\Models\BaseModel;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use App\Users\Auth\AssociatableGate;
 use Illuminate\Support\Facades\Auth;
-use App\Users\Models\UserAssociations;
+use App\Users\Entities\UserAssociations;
 
 abstract class Associatable extends BaseModel
 {
@@ -57,7 +57,7 @@ abstract class Associatable extends BaseModel
 
     /**
      * Finds a given member in the current association
-     * @return \App\Users\Models\User|null
+     * @return \App\Users\Entities\User|null
      */
     public function findUser(User $user)
     {

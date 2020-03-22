@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Users\Entities\User;
+use App\Users\Entities\UserAssociations;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;

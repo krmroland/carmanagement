@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Faker\Generator as Faker;
 use App\Tenants\Models\Tenant;
 

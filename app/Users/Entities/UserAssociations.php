@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Users\Models;
+namespace App\Users\Entities;
 
 use App\Models\Helpers;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;

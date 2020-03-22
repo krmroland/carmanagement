@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Support\Facades\Auth;
 
 trait InteractsWithUser

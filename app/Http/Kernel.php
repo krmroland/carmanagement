@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             \App\Http\Middleware\JSONMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Laravel\Airlock\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ],
     ];
 

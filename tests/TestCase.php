@@ -2,9 +2,9 @@
 
 namespace Tests;
 
-use App\Users\Models\User;
 use Illuminate\Support\Arr;
-use Laravel\Airlock\Airlock;
+use App\Users\Entities\User;
+use Laravel\Sanctum\Sanctum;
 use App\Products\Models\Product;
 use Illuminate\Support\Facades\Mail;
 use App\Products\Models\ProductVariant;
@@ -32,7 +32,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function actingAsUserWithPermission($abilities = [], User $user = null)
     {
-        Airlock::actingAs($user ?: factory(User::class)->create(), Arr::wrap($abilities));
+        Sanctum::actingAs($user ?: factory(User::class)->create(), Arr::wrap($abilities));
 
         return $this;
     }
@@ -43,7 +43,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function actingAsAdmin()
     {
-        Airlock::actingAs(factory(User::class)->create(['is_admin' => true]));
+        Sanctum::actingAs(factory(User::class)->create(['is_admin' => true]));
 
         return $this;
     }
@@ -54,7 +54,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function actingAsUser(User $user = null)
     {
-        Airlock::actingAs($user ?: factory(User::class)->create());
+        Sanctum::actingAs($user ?: factory(User::class)->create());
 
         return $this;
     }

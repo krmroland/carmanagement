@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Users\Models;
+namespace App\Users\Entities;
 
 use App\Models\Helpers;
 use Illuminate\Support\Arr;
@@ -9,8 +9,8 @@ use App\Accounts\HasAccount;
 use App\Tenants\Models\Tenant;
 use App\Contracts\ProductOwner;
 use App\Products\Models\Product;
-use Laravel\Airlock\HasApiTokens;
-use Laravel\Airlock\NewAccessToken;
+use App\Users\Models\Illuminate;
+use Laravel\Sanctum\HasApiTokens;
 use App\Products\Models\ProductVariant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -114,26 +114,6 @@ class User extends Authenticatable implements ProductOwner
         return $this->id === (int) $id;
     }
 
-    /**
-     * Create a new personal access token for the user.
-     *
-     * @param  string  $name
-     * @param  array  $abilities
-     * @return \Laravel\Airlock\NewAccessToken
-     */
-    public function createToken($data, array $abilities = ['*'])
-    {
-        $token = $this->tokens()
-            ->make([
-                'token' => hash('sha256', $plainTextToken = Str::random(80)),
-                'abilities' => $abilities,
-            ])
-            ->forceFill($data);
-
-        $token->save();
-
-        return new NewAccessToken($token, $plainTextToken);
-    }
     /**
      * A user can belong to many organizations
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

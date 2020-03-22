@@ -3,7 +3,7 @@
 namespace Tests\Feature\Tenants\Controllers;
 
 use Tests\TestCase;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use App\Tenants\Models\Tenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

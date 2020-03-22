@@ -2,7 +2,7 @@
 
 namespace App\Users\Auth;
 
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Auth\Access\Response;
 use App\Users\Auth\Models\Associatable;
 

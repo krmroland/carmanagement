@@ -3,7 +3,7 @@
 namespace App\Products\Models;
 
 use App\Models\BaseModel;
-use App\Users\Models\User;
+use App\Users\Entities\User;
 use Illuminate\Support\Arr;
 use App\Currencies\HasCurrency;
 use Illuminate\Support\Facades\DB;
