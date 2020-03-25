@@ -37,4 +37,18 @@ class LoginControllerTest extends TestCase
                 'email' => 'These credentials do not match our records.',
             ]);
     }
+
+    public function test_it_returns_the_currently_authenticated_user()
+    {
+        $user = factory(User::class)->create(['password' => bcrypt('secret')]);
+
+        $this->postJson('auth/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ])->assertOk();
+
+        $this->assertAuthenticated();
+
+        $this->get('api/auth/user')->assertOk();
+    }
 }

@@ -3,12 +3,13 @@
 namespace App\Users\Entities;
 
 use App\Accounts\OwnsAnAccount;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, OwnsAnAccount;
+    use HasApiTokens, Notifiable, OwnsAnAccount;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    /**
+     * The eager-loaded user relationships
+     * @var array
+     */
+    protected $with = ['account'];
 
     /**
      * The attributes that should be cast to native types.

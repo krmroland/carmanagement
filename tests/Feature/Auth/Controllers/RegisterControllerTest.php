@@ -2,15 +2,14 @@
 
 namespace Tests\Feature\Auth\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_registers_a_new_user()
+    public function testItRegistersANewUser()
     {
         $user = [
             'name' => 'John Doe',
@@ -22,7 +21,7 @@ class RegisterControllerTest extends TestCase
         $this->postJson('auth/register', $user)->assertCreated();
     }
 
-    public function test_it_logins_in_a_user_after_registering_them()
+    public function testItLoginsInAUserAfterRegisteringThem()
     {
         $this->assertGuest();
 
