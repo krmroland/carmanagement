@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Request::macro('getPerPage', function ($default = null) {
-            $value = $this->get('per_page', 200);
+            $value = $this->get('per_page', 25);
 
             return is_numeric($value) ? min(abs($value), 200) : value($default);
         });

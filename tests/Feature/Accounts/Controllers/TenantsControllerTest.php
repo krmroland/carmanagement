@@ -22,4 +22,13 @@ class TenantsControllerTest extends TestCase
             ->dump()
             ->assertOk();
     }
+
+    public function test_it_creates_a_new_tenant()
+    {
+        $data = factory(Tenant::class)->raw();
+
+        $this->actingAsUser()
+            ->postJson('/api/v1/tenants', $data)
+            ->assertCreated();
+    }
 }

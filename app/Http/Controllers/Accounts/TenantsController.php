@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Accounts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use App\Http\Requests\Tenants\TenantsRequest;
 
 class TenantsController extends Controller
 {
@@ -17,6 +19,7 @@ class TenantsController extends Controller
         return $request
             ->userAccount()
             ->tenants()
+            ->oldest('first_name')
             ->paginateUsingCurrentRequest();
     }
 
@@ -25,8 +28,17 @@ class TenantsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TenantsRequest $request)
     {
+        $tenant = $request
+            ->userAccount()
+            ->tenants()
+            ->create($request->validated());
+
+        return Response::json([
+            'message' => 'Tenant was created successfully',
+            'tenant' => $tenant,
+        ])->setStatusCode(201);
     }
 
     /**
