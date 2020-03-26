@@ -4,8 +4,8 @@ namespace App\Accounts\Entities;
 
 use App\Models\BaseModel;
 use App\Users\Entities\User;
-use App\Accounts\Models\Tenant;
 use App\Accounts\Models\Product;
+use App\Tenants\Entities\Tenant;
 use App\Accounts\Models\Illuminate;
 
 class Account extends BaseModel

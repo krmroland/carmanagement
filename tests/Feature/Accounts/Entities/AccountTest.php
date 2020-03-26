@@ -15,7 +15,7 @@ class AccountTest extends TestCase
         $user = factory(User::class)->create();
 
         $this->assertDatabaseHas('accounts', [
-            'owner_id' => 1,
+            'owner_id' => $user->id,
             'owner_type' => $user->getMorphClass(),
         ]);
     }

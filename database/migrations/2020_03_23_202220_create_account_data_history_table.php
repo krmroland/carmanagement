@@ -11,12 +11,12 @@ class CreateAccountDataHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_data_history', function (Blueprint $table) {
+        Schema::create('account_data_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->foreignId('account_id');
+            $table->foreignId('account_id')->index();
             $table->string('action'); // created,updated,deleted
-            $table->morphs('item');
+            $table->morphs('detail', 'index');
             $table->json('payload')->nullable();
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateAccountDataHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_data_history');
+        Schema::dropIfExists('account_data_histories');
     }
 }
