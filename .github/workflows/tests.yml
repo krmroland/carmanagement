@@ -5,15 +5,6 @@ on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mariadb:10.4.1
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: rentit_api_tests
-        ports:
-          - 13306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: actions/checkout@v1
@@ -32,9 +23,6 @@ jobs:
           touch database/database.sqlite
       - name: Tests
         env:
-          DB_HOST: 127.0.0.1
-          DB:PORT: 13306
-          DB_DATABASE: rentit_api_tests
-          DB_USERNAME: root
-          DB_PASSWORD: password
+          DB_CONNECTION: 'sqlite'
+          DB_DATABASE: ':memory:'
         run: composer test
