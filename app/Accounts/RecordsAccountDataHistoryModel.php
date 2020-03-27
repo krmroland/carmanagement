@@ -27,7 +27,7 @@ abstract class RecordsAccountDataHistoryModel extends BaseModel
         parent::boot();
 
         foreach (['created', 'updated', 'deleted'] as $event) {
-            static::$event(fn ($item) => $item->recordAccountDataEvent($event));
+            static::$event(fn($item) => $item->recordAccountDataEvent($event));
         }
     }
 

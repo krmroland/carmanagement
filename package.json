@@ -5,9 +5,9 @@
     "prettier": "1.15.0"
   },
   "scripts": {
-    "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\" \"resources/ui/**/*.js\"",
-    "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php \" \"resources/ui/**/*.js\" ",
-    "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\" \"resources/ui/**/*.js\" "
+    "lint": "prettier   \"{app,database,config,routes,tests}/**/*.php\"",
+    "lint:check": "prettier --check  \"{app,database,config,routes,tests}/**/*.php\"",
+    "lint:fix": "prettier fix  --write \"{app,database,config,routes,tests}/**/*.php\""
   },
   "name": "api",
   "description": "<p align=\"center\"><img src=\"https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg\" width=\"400\"></p>",

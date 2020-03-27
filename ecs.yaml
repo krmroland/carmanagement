@@ -22,6 +22,7 @@ parameters:
       - "public/*"
       - "bootstrap/*"
     skip:
+        PhpCsFixer\Fixer\FunctionNotation\FunctionDeclarationFixer: ~
         PhpCsFixer\Fixer\Strict\StrictComparisonFixer: ~
         PhpCsFixer\Fixer\Strict\StrictParamFixer: ~
         PhpCsFixer\Fixer\PhpUnit\PhpUnitStrictFixer: ~
