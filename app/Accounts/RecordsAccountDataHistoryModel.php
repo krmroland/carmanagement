@@ -40,9 +40,9 @@ abstract class RecordsAccountDataHistoryModel extends BaseModel
             'detail_id' => $this->getKey(),
             'detail_type' => static::class,
             'account_id' => $this->getAccountId(),
-            'user_id' => Auth::id(),
+            'by_user_id' => Auth::id(),
             'action' => $eventAction,
-            'payload' => $this->getAttributes(),
+            'payload' => $eventAction === 'updated' ? $this->getChanges() : $this->getAttributes(),
             'created_at' => Date::now()->toJson(),
         ]);
     }

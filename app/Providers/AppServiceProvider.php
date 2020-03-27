@@ -21,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Builder::macro('forCurrentAccountId', function ($key = 'account_id') {
+            return $this->where([
+                $key => with(app('request')->userAccount())->getKey(),
+            ]);
+        });
+
         Builder::macro('paginateUsingCurrentRequest', function ($perPage = null, ...$args) {
             return $this->paginate(app('request')->getPerPage($perPage), ...$args)->appends(
                 app('request')->except('page')

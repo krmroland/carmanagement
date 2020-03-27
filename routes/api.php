@@ -11,4 +11,5 @@ Route::middleware(['auth:sanctum'])
     ->prefix('v1')
     ->group(function () {
         Route::apiResource('tenants', \App\Http\Controllers\Accounts\TenantsController::class);
+        Route::apiResource('products', App\Http\Controllers\Products\ProductsController::class);
     });

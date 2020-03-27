@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('currency');
             $table->json('details')->nullable();
             $table->unsignedBigInteger('total_cost')->default(0);
-            $table->decimal('total_dues')->nullable();
-            $table->decimal('total_collections')->nullable();
+            $table->decimal('total_dues')->default(0);
+            $table->decimal('total_collections')->default(0);
             $table->string('type');
 
             $table

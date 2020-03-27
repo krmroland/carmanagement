@@ -14,7 +14,10 @@ class CreateAccountDataHistoryTable extends Migration
         Schema::create('account_data_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
-            $table->foreignId('account_id')->index();
+            $table
+                ->foreignId('account_id')
+                ->index()
+                ->nullable();
             $table->string('action'); // created,updated,deleted
             $table->morphs('detail', 'index');
             $table->json('payload')->nullable();
