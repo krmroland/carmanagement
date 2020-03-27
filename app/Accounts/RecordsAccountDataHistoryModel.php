@@ -5,7 +5,8 @@ namespace App\Accounts;
 use App\Models\BaseModel;
 use App\Accounts\Entities\Account;
 use Illuminate\Support\Facades\Auth;
-use App\Accounts\Entities\AccountDataHistory;
+use Illuminate\Support\Facades\Date;
+use App\Accounts\Jobs\RecordAccountDataChanges;
 
 abstract class RecordsAccountDataHistoryModel extends BaseModel
 {
@@ -31,24 +32,18 @@ abstract class RecordsAccountDataHistoryModel extends BaseModel
     }
 
     /**
-     * The account data related events
-     * @return MorphMnay
-     */
-    public function history()
-    {
-        return $this->morphMany(AccountDataHistory::class, 'detail');
-    }
-
-    /**
      * Records account data event
      */
     public function recordAccountDataEvent($eventAction)
     {
-        $this->history()->create([
+        RecordAccountDataChanges::dispatch([
+            'detail_id' => $this->getKey(),
+            'detail_type' => static::class,
             'account_id' => $this->getAccountId(),
             'user_id' => Auth::id(),
             'action' => $eventAction,
             'payload' => $this->getAttributes(),
+            'created_at' => Date::now()->toJson(),
         ]);
     }
 

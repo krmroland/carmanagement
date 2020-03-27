@@ -19,11 +19,10 @@ class TenantsControllerTest extends TestCase
 
         $this->actingAsUser($user)
             ->getJson('/api/v1/tenants')
-            ->dump()
             ->assertOk();
     }
 
-    public function test_it_creates_a_new_tenant()
+    public function testItCreatesANewTenant()
     {
         $data = factory(Tenant::class)->raw();
 
