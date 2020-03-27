@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Accounts;
 
 use Illuminate\Http\Request;
+use App\Tenants\Entities\Tenant;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\Tenants\TenantsRequest;
@@ -16,9 +17,7 @@ class TenantsController extends Controller
      */
     public function index(Request $request)
     {
-        return $request
-            ->userAccount()
-            ->tenants()
+        return Tenant::forCurrentAccount()
             ->oldest('first_name')
             ->paginateUsingCurrentRequest();
     }
@@ -30,10 +29,7 @@ class TenantsController extends Controller
      */
     public function store(TenantsRequest $request)
     {
-        $tenant = $request
-            ->userAccount()
-            ->tenants()
-            ->create($request->validated());
+        $tenant = Tenant::create($request->withCurrentAccountId()->validated());
 
         return Response::json([
             'message' => 'Tenant was created successfully',

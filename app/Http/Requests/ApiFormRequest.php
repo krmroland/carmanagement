@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Factory;
 
-abstract class ApiFormRequest extends FormRequest
+class ApiFormRequest extends FormRequest
 {
     /**
      * Determines if we should include the account id in the validated results
@@ -40,7 +40,7 @@ abstract class ApiFormRequest extends FormRequest
      * Includes the account id into the current request
      * @return $this
      */
-    public function withAuthAccountId($key = 'account_id')
+    public function withCurrentAccountId($key = 'account_id')
     {
         $this->merge([$key => optional($this->userAccount())->getKey()]);
 

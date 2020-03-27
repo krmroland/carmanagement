@@ -17,7 +17,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return Product::forCurrentAccountId()->paginateUsingCurrentRequest();
+        return Product::forCurrentAccount()->paginateUsingCurrentRequest();
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product = Product::create($request->withAuthAccountId()->validated());
+        $product = Product::create($request->withCurrentAccountId()->validated());
 
         return Response::json([
             'message' => 'Product was created successfully',

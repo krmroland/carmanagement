@@ -22,11 +22,13 @@ class ProductsControllerTest extends TestCase
             ->assertCreated();
     }
 
-    public function testItListsAllAvailableProjects()
+    public function testItListsAllAvailableProductsForCurrentUserAccount()
     {
         $user = factory(User::class)->create();
-
-        factory(Product::class, 3)->create(['account_id' => $user->account]);
+        factory(Product::class, 2)->create(); //control
+        factory(Product::class, 3)
+            ->state('withVariantData')
+            ->create(['account_id' => $user->account]);
 
         $this->actingAsUser($user)
             ->getJson('api/v1/products')

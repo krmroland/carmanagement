@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Builder::macro('forCurrentAccountId', function ($key = 'account_id') {
+        Builder::macro('forCurrentAccount', function ($key = 'account_id') {
             return $this->where([
                 $key => with(app('request')->userAccount())->getKey(),
             ]);
