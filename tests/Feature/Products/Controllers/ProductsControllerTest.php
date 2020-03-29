@@ -46,7 +46,6 @@ class ProductsControllerTest extends TestCase
 
         $this->actingAsUser($user)
             ->getJson("api/v1/products/{$product->id}")
-            ->dump()
             ->assertOk();
     }
 }

@@ -4,10 +4,10 @@ namespace Tests\Feature\Accounts;
 
 use Tests\TestCase;
 use App\Users\Entities\User;
-use App\Accounts\ResolveUserAccountFromRequest;
+use App\Accounts\UserAccountFromRequest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ResolveUserAccountFromRequestTest extends TestCase
+class UserAccountFromRequestTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,6 +17,6 @@ class ResolveUserAccountFromRequestTest extends TestCase
 
         $this->actingAsUser($user);
 
-        $this->assertTrue($user->account->is(app(ResolveUserAccountFromRequest::class)->get()));
+        $this->assertTrue($user->account->is(app(UserAccountFromRequest::class)->get()));
     }
 }
