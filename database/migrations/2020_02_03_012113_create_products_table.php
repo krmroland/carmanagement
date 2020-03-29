@@ -17,16 +17,9 @@ class CreateProductsTable extends Migration
             $table->string('name')->index();
             $table->string('currency');
             $table->json('details')->nullable();
+            $table->string('offering');
             $table->unsignedBigInteger('total_cost')->default(0);
-            $table->decimal('total_dues')->default(0);
-            $table->decimal('total_collections')->default(0);
-            $table->string('type');
-
-            $table
-                ->foreignId('user_id')
-                ->nullable()
-                ->onDelete('set null');
-
+            $table->json('stats')->nullable();
             $table->timestamps();
         });
     }

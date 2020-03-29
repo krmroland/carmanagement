@@ -20,7 +20,7 @@ class ProductRequest extends ApiFormRequest
             'currency' => 'required',
             'details' => 'array',
             'total_cost' => 'numeric',
-            'type' => ['required', Rule::in(Product::TYPES)],
+            'offering' => ['required', Rule::in(Product::OFFERINGS)],
         ];
     }
 }

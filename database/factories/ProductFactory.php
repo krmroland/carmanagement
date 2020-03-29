@@ -10,7 +10,7 @@ use App\Products\Entities\ProductVariant;
 $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
-        'type' => $faker->randomElement(['house', 'car']),
+        'offering' => $faker->randomElement(Product::OFFERINGS),
         'currency' => 'UGX',
         'account_id' => fn() => factory(User::class)->create()->account,
     ];

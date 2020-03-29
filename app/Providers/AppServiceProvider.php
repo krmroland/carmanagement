@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use App\Accounts\UserAccountFromRequest;
 use Illuminate\Database\Eloquent\Builder;
-use App\Accounts\ResolveUserAccountFromRequest;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Request::macro('userAccount', function () {
-            return app(ResolveUserAccountFromRequest::class)->get();
+            return app(UserAccountFromRequest::class)->get();
         });
 
         Request::macro('getPerPage', function ($default = null) {

@@ -17,7 +17,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return Product::forCurrentAccount()->paginateUsingCurrentRequest();
+        return Product::forCurrentAccount()
+            ->latest('updated_at')
+            ->paginateUsingCurrentRequest();
     }
 
     /**
@@ -39,11 +41,13 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
+        $this->authorize('accountAccess', $product);
+
+        return $product;
     }
 
     /**

@@ -35,4 +35,18 @@ class ProductsControllerTest extends TestCase
             ->assertOk()
             ->assertJsonCount(3, 'data');
     }
+
+    public function testItShowsTheDetailsOfAproduct()
+    {
+        $user = factory(User::class)->create();
+
+        $product = factory(Product::class)
+            ->state('withVariantData')
+            ->create(['account_id' => $user->account]);
+
+        $this->actingAsUser($user)
+            ->getJson("api/v1/products/{$product->id}")
+            ->dump()
+            ->assertOk();
+    }
 }

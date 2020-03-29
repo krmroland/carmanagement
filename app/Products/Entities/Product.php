@@ -13,15 +13,15 @@ class Product extends RecordsAccountDataHistoryModel
     use HasCurrency;
 
     /**
-     * The available product types
+     * The available product offerings
      */
-    public const TYPES = ['car', 'house'];
+    public const OFFERINGS = ['car', 'house'];
 
     /**
      * The casts array
      * @var array
      */
-    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:2'];
+    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:2', 'stats' => 'json'];
 
     /**
      * A product has many variants
@@ -53,6 +53,7 @@ class Product extends RecordsAccountDataHistoryModel
             if ($saved && count(Arr::wrap($fields)) > 0) {
                 $this->variants()->create($fields);
             }
+
             return $saved;
         });
     }
