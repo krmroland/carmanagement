@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Products\Variants;
 use Illuminate\Http\Request;
 use App\Products\Entities\Product;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 
 class ProductVariantsController extends Controller
 {
@@ -23,12 +24,18 @@ class ProductVariantsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $this->authorize('accountAccess', $product);
+
+        $variant = $product->variants()->create($request->validate(['identifier' => 'required']));
+
+        return Response::json([
+            'message' => 'Variant was added successfully',
+            'variant' => $variant,
+        ])->setStatusCode(201);
     }
 
     /**
@@ -39,19 +46,16 @@ class ProductVariantsController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -62,6 +66,5 @@ class ProductVariantsController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

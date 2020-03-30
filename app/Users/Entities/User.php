@@ -39,6 +39,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     /**
      * Determines if the current user is an admin
      * @return boolean
