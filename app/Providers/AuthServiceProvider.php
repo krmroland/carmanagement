@@ -23,6 +23,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function ($user) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+        });
+
         Gate::define(
             'accountAccess',
             'App\Accounts\UserAccountFromRequest@userHasAccessToCurrentAccount'

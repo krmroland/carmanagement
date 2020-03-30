@@ -31,4 +31,15 @@ abstract class TestCase extends BaseTestCase
 
         return $this;
     }
+
+    /**
+     * Makes a request while acting as a given user
+     * @return $this
+     */
+    public function actingAsAdmin()
+    {
+        Sanctum::actingAs(factory(User::class)->create(['is_admin' => true]));
+
+        return $this;
+    }
 }

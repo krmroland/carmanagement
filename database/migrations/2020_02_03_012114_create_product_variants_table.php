@@ -13,7 +13,6 @@ class CreateProductVariantsTable extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-
             $table->string('identifier'); // eg number plate for cars
             $table->json('details')->nullable();
             $table->string('image_path')->nullable();
