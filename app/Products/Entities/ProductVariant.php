@@ -56,7 +56,7 @@ class ProductVariant extends RecordsAccountDataHistoryModel
      */
     public function tenants()
     {
-        return $this->belongsToMany(Tenant::class, 'product_tentna_tenants')
+        return $this->belongsToMany(Tenant::class, 'product_tenants')
             ->withTimestamps()
             ->withPivot(['started_at', 'ended_at', 'accepted_at', 'due_amount', 'paid_amount'])
             ->as('tenancy')
@@ -70,5 +70,14 @@ class ProductVariant extends RecordsAccountDataHistoryModel
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Gets the account id
+     * @return int
+     */
+    public function getAccountId()
+    {
+        return optional($this->product)->account_id;
     }
 }

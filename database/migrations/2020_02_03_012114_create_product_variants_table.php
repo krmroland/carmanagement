@@ -19,11 +19,12 @@ class CreateProductVariantsTable extends Migration
             $table->unsignedBigInteger('current_tenant_id')->nullable();
             $table->unique(['identifier', 'product_id']);
             $table->timestamps();
+            $table->json('stats')->json();
 
             $table
                 ->foreignId('product_id')
                 ->index()
-                ->onDelete('restrict');
+                ->onDelete('cascade');
         });
     }
 
