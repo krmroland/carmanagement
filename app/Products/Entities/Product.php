@@ -2,16 +2,14 @@
 
 namespace App\Products\Entities;
 
+use App\Casts\Currency;
 use Illuminate\Support\Arr;
-use App\Currencies\HasCurrency;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Accounts\RecordsAccountDataHistoryModel;
 
 class Product extends RecordsAccountDataHistoryModel
 {
-    use HasCurrency;
-
     /**
      * The available product offerings
      */
@@ -21,7 +19,12 @@ class Product extends RecordsAccountDataHistoryModel
      * The casts array
      * @var array
      */
-    protected $casts = ['details' => 'json', 'total_cost' => 'decimal:2', 'stats' => 'json'];
+    protected $casts = [
+        'details' => 'json',
+        'total_cost' => 'decimal:2',
+        'stats' => 'json',
+        'currency' => Currency::class,
+    ];
 
     /**
      * A product has many variants
