@@ -18,13 +18,14 @@ class CreateProductVariantsTable extends Migration
             $table->string('image_path')->nullable();
             $table->unsignedBigInteger('current_tenant_id')->nullable();
             $table->unique(['identifier', 'product_id']);
-            $table->timestamps();
-            $table->json('stats')->json();
+            $table->json('stats')->nullable();
 
             $table
                 ->foreignId('product_id')
                 ->index()
                 ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 
