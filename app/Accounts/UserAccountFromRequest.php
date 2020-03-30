@@ -34,6 +34,15 @@ class UserAccountFromRequest
      */
     public function get()
     {
+        return $this->currentAccount();
+    }
+
+    /**
+     * Extracts the current account
+     * @return \App\Accounts\Entities\Account|null
+     */
+    public function currentAccount()
+    {
         if (!isset($this->account)) {
             $user = Auth::user();
             // An account id could be passed through the request for organization accounts
@@ -57,8 +66,7 @@ class UserAccountFromRequest
             return false;
         }
 
-        $currentAccount = $this->get();
-
-        return $currentAccount && $currentAccount->getKey() === $model->getAttribute($key);
+        return (int) optional($this->currentAccount())->getKey() ===
+            (int) $model->getAttribute($key);
     }
 }
